@@ -9,6 +9,7 @@ import (
 
 	"github.com/henrygd/beszel"
 	"github.com/henrygd/beszel/internal/hub"
+	"github.com/henrygd/beszel/internal/hub/backup"
 	_ "github.com/henrygd/beszel/internal/migrations"
 
 	"github.com/pocketbase/pocketbase"
@@ -28,6 +29,15 @@ func main() {
 	}
 
 	baseApp := getBaseApp()
+
+	// restore latest backup from external storage before PocketBase
+	// initializes the database (for deployments without persistent storage)
+	if cfg := backup.Parse(); cfg.Enabled() {
+		if err := backup.MaybeRestore(baseApp.DataDir(), cfg); err != nil {
+			log.Fatal("restore external backup: ", err)
+		}
+	}
+
 	hub := hub.NewHub(baseApp)
 	if err := hub.StartHub(); err != nil {
 		log.Fatal(err)
