@@ -10,6 +10,9 @@ permissions:
 
 jobs:
   goreleaser:
+    # 仅上游仓库运行：fork 上 CI 中 lingui extract 会改写 .po 文件，
+    # 导致 git 脏状态使 GoReleaser 报错，且 fork 不需要发布二进制
+    if: github.repository_owner == 'henrygd'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
