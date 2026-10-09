@@ -18,7 +18,9 @@ import (
 // id_ed25519（SSH 私钥）与 config.yml 直接复制。
 func Snapshot(app core.App) ([]byte, error) {
 	dataDir := app.DataDir()
-	tmpDir, err := os.MkdirTemp("", "beszel-snapshot-")
+	// 使用数据目录而非 /tmp：scratch 镜像没有 /tmp，
+	// 数据目录一定存在且可写（PocketBase 启动时已初始化）
+	tmpDir, err := os.MkdirTemp(dataDir, "beszel-snapshot-")
 	if err != nil {
 		return nil, err
 	}
