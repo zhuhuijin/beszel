@@ -1184,6 +1184,10 @@ msgstr "Neaktivní"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Pokud jste ztratili heslo k vašemu účtu správce, můžete jej obnovit pomocí následujícího příkazu."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Stav"
 msgid "Status"
 msgstr "Stav"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Podstav"
@@ -2171,6 +2179,10 @@ msgstr "Testovací oznámení odesláno"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Celkový stav je <0>ok</0>, když jsou všechny systémy v provozu, <1>warn</1>, když jsou spuštěny výstrahy, a <2>error</2>, když je některý systém mimo provoz."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Poté se přihlaste do backendu a obnovte heslo k uživatelskému účtu v tabulce uživatelů."
@@ -2267,6 +2279,10 @@ msgstr "Spustí se, když využití paměti během 5 minut překročí prahovou 
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Spustí se, když kontrola stavu kontejneru oznámí nezdravý stav"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Využití"
 msgid "Usage of storage pool {displayName}"
 msgstr "Využití fondu {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Zobrazit vašich 200 nejnovějších upozornění."
 msgid "Visible Fields"
 msgstr "Viditelné sloupce"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Čeká se na dostatek záznamů k zobrazení"

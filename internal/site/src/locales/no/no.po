@@ -1184,6 +1184,10 @@ msgstr "Inaktiv"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Dersom du har mistet passordet til admin-kontoen kan du nullstille det med følgende kommando."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Tilstand"
 msgid "Status"
 msgstr ""
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Undertilstand"
@@ -2171,6 +2179,10 @@ msgstr "Test-varsling sendt"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Den generelle statusen er <0>ok</0> når alle systemer er oppe, <1>varsel</1> når varsler utløses, og <2>feil</2> når et system er nede."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Logg deretter inn i backend og nullstill passordet på din konto i users-tabellen."
@@ -2267,6 +2279,10 @@ msgstr "Slår inn når gjennomsnittsbelastningen over 5 minutter overstiger en g
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Utløses når en helsesjekk av en container rapporterer en usunn tilstand"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Forbruk"
 msgid "Usage of storage pool {displayName}"
 msgstr "Bruk av lagringspool {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Vis de 200 siste varslene."
 msgid "Visible Fields"
 msgstr "Synlige Felter"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Venter på nok registreringer til å vise"

@@ -66,7 +66,7 @@ msgstr "{daysLeft, plural, other {# 天}}"
 
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "{diskName} I/O"
-msgstr ""
+msgstr "{diskName} I/O"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "{numFailed, plural, one {# failed service} other {# failed services}}"
@@ -652,7 +652,7 @@ msgstr "核心"
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "CPU Cores"
@@ -1183,6 +1183,10 @@ msgstr "闲置"
 #: src/components/login/forgot-pass-form.tsx
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "如果您丢失了管理员账户的密码，可以使用以下命令重置。"
+
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr "忽略 TLS 证书错误"
 
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
@@ -2057,6 +2061,10 @@ msgstr "状态"
 msgid "Status"
 msgstr "状态"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr "存储池"
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "子状态"
@@ -2171,6 +2179,10 @@ msgstr "测试通知已发送"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "当所有系统都正常运行时，整体状态为 <0>ok</0>；当触发警报时为 <1>警告</1>；当任何系统故障时为 <2>错误</2>。"
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr "存储池已降级或不可用"
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "然后登录到后台并在用户表中重置您的用户账户密码。"
@@ -2267,6 +2279,10 @@ msgstr "当 5 分钟内的平均负载超过阈值时触发"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "当容器健康检查报告为不健康时触发"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr "当 ZFS 存储池降级或不可用时触发"
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "使用"
 msgid "Usage of storage pool {displayName}"
 msgstr "存储池 {displayName} 的使用量"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr "用于自签名证书。"
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "查看您最近的200个警报。"
 msgid "Visible Fields"
 msgstr "可见列"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "正在收集足够的数据来显示"

@@ -239,7 +239,8 @@ func TestZfsPoolAlertWritesHistory(t *testing.T) {
 	history, err := hub.FindRecordsByFilter("alerts_history", "alert_id={:alert_id}", "", 0, 0, map[string]any{"alert_id": pool.Id})
 	assert.NoError(t, err)
 	require.Len(t, history, 1, "expected one history entry per user")
-	assert.Equal(t, "Storage Pool: tank", history[0].GetString("name"))
+	assert.Equal(t, "StoragePool", history[0].GetString("name"))
+	assert.Equal(t, "tank", history[0].GetString("monitor_name"))
 	assert.Equal(t, system.Id, history[0].GetString("system"))
 }
 

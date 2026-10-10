@@ -1184,6 +1184,10 @@ msgstr "Bezczynna"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Jeśli utraciłeś hasło do swojego konta administratora, możesz je zresetować, używając następującego polecenia."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Stan"
 msgid "Status"
 msgstr ""
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Stan podrzędny"
@@ -2171,6 +2179,10 @@ msgstr "Testowe powiadomienie wysłane."
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Ogólny status to <0>ok</0>, gdy wszystkie systemy działają, <1>ostrzeżenie</1>, gdy wyzwalane są alerty, oraz <2>błąd</2>, gdy którykolwiek z systemów nie działa."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Następnie zaloguj się do panelu administracyjnego i  zresetuj hasło do konta użytkownika w tabeli użytkowników."
@@ -2267,6 +2279,10 @@ msgstr "Uruchamia się, gdy 5-minutowe średnie obciążenie systemu przekroczy 
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Wyzwala alert, gdy kontrola stanu kontenera zgłosi nieprawidłowy stan"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Wykorzystanie"
 msgid "Usage of storage pool {displayName}"
 msgstr "Użycie puli magazynu {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Wyświetl 200 ostatnich alertów."
 msgid "Visible Fields"
 msgstr "Widoczne kolumny"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Oczekiwanie na wystarczającą liczbę rekordów do wyświetlenia"

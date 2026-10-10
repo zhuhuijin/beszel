@@ -1184,6 +1184,10 @@ msgstr "לא פעיל"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "אם איבדת את הסיסמה לחשבון המנהל שלך, תוכל לאפס אותה באמצעות הפקודה הבאה."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "מצב"
 msgid "Status"
 msgstr "סטטוס"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "מצב משני"
@@ -2171,6 +2179,10 @@ msgstr "התראת בדיקה נשלחה"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "הסטטוס הכללי הוא <0>ok</0> כשכל המערכות פועלות, <1>warn</1> כשמופעלות התראות, ו-<2>error</2> כשמערכת כלשהי מושבתת."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "לאחר מכן התחבר ל-backend ואפס את סיסמת חשבון המשתמש שלך בטבלת המשתמשים."
@@ -2267,6 +2279,10 @@ msgstr "מופעל כאשר ממוצע העומס ל-5 דקות עולה על ס
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "מופעל כאשר בדיקת התקינות של קונטיינר מדווחת על מצב לא תקין"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "שימוש"
 msgid "Usage of storage pool {displayName}"
 msgstr "שימוש במאגר האחסון {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "צפה ב-200 ההתראות האחרונות שלך."
 msgid "Visible Fields"
 msgstr "שדות גלויים"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "ממתין לרשומות מספיקות לתצוגה"

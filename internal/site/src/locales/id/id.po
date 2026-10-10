@@ -1184,6 +1184,10 @@ msgstr "Menganggur"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Jika anda kehilangan kata sandi untuk akun admin anda, anda dapat meresetnya menggunakan perintah berikut."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Status"
 msgid "Status"
 msgstr ""
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Sub Status"
@@ -2171,6 +2179,10 @@ msgstr "Notifikasi tes dikirim"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Status keseluruhan adalah <0>ok</0> ketika semua sistem aktif, <1>warn</1> ketika peringatan dipicu, dan <2>error</2> ketika ada sistem yang mati."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Kemudian masuk ke backend dan reset kata sandi akun pengguna anda di tabel pengguna."
@@ -2267,6 +2279,10 @@ msgstr "Dipicu ketika rata-rata beban 5 menit melebihi ambang batas"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Dipicu saat pemeriksaan kesehatan kontainer melaporkan status tidak sehat"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Penggunaan"
 msgid "Usage of storage pool {displayName}"
 msgstr "Penggunaan pool penyimpanan {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Lihat 200 peringatan terbaru anda."
 msgid "Visible Fields"
 msgstr "Metrik yang Terlihat"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Menunggu cukup record untuk ditampilkan"

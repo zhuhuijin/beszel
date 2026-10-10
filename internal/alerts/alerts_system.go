@@ -318,10 +318,10 @@ func (am *AlertManager) HandleSystemAlerts(systemRecord *core.Record, data *syst
 				sumPct := float32(value)
 				if sumPct > maxPct {
 					maxPct = sumPct
-					alert.descriptor = diskAlertDescriptor(key)
+					alert.descriptorKey = key
 					if poolKey, ok := strings.CutPrefix(key, "zfs:"); ok {
 						if pool := data.Stats.ZfsPools[poolKey]; pool != nil && pool.DisplayName != "" {
-							alert.descriptor = diskAlertDescriptor(zfsDiskAlertKey(pool.DisplayName))
+							alert.descriptorKey = zfsDiskAlertKey(pool.DisplayName)
 						}
 					}
 				}
@@ -333,7 +333,7 @@ func (am *AlertManager) HandleSystemAlerts(systemRecord *core.Record, data *syst
 				sumTemp := float32(value) / float32(alert.count)
 				if sumTemp > maxTemp {
 					maxTemp = sumTemp
-					alert.descriptor = fmt.Sprintf("Highest sensor %s", key)
+					alert.descriptorKey = key
 				}
 			}
 			alert.val = float64(maxTemp)
@@ -387,6 +387,7 @@ func hasRepresentativeBattery(legacy [2]uint8, batteries map[string]uint8) bool 
 func (am *AlertManager) sendSystemAlert(alert SystemAlertData) {
 	// log.Printf("Sending alert %s: val %f | count %d | threshold %f\n", alert.name, alert.val, alert.count, alert.threshold)
 	systemName := alert.systemRecord.GetString("name")
+	s := notificationStringsFor(userNotificationLang(am.hub, alert.alertData.UserID))
 
 	if state, ok := cpuStateAlerts[alert.name]; ok {
 		alert.name = state.label
@@ -400,35 +401,38 @@ func (am *AlertManager) sendSystemAlert(alert SystemAlertData) {
 		alert.name = after + "m Load"
 	}
 
-	// make title alert name lowercase if not CPU or GPU
-	titleAlertName := alert.name
-	if titleAlertName != "CPU" && titleAlertName != "GPU" && !strings.HasPrefix(titleAlertName, "CPU") {
-		titleAlertName = strings.ToLower(titleAlertName)
+	titleAlertName := s.alertDisplayName(alert.name)
+
+	// build the body descriptor; a raw disk/sensor key overrides the alert name
+	descriptor := alert.name
+	if s.alertNames != nil {
+		descriptor = s.alertDisplayName(alert.name)
+	}
+	if alert.descriptorKey != "" {
+		switch alert.name {
+		case "Disk usage":
+			descriptor = s.diskUsageDescriptor(alert.descriptorKey)
+		case "Temperature":
+			descriptor = fmt.Sprintf(s.highestSensor, alert.descriptorKey)
+		}
 	}
 
 	var subject string
 	lowAlert := isLowAlert(alert.name)
 	if alert.triggered {
 		if lowAlert {
-			subject = fmt.Sprintf("%s %s below threshold", systemName, titleAlertName)
+			subject = fmt.Sprintf(s.belowThreshold, systemName, titleAlertName)
 		} else {
-			subject = fmt.Sprintf("%s %s above threshold", systemName, titleAlertName)
+			subject = fmt.Sprintf(s.aboveThreshold, systemName, titleAlertName)
 		}
 	} else {
 		if lowAlert {
-			subject = fmt.Sprintf("%s %s above threshold", systemName, titleAlertName)
+			subject = fmt.Sprintf(s.aboveThreshold, systemName, titleAlertName)
 		} else {
-			subject = fmt.Sprintf("%s %s below threshold", systemName, titleAlertName)
+			subject = fmt.Sprintf(s.belowThreshold, systemName, titleAlertName)
 		}
 	}
-	minutesLabel := "minute"
-	if alert.min > 1 {
-		minutesLabel += "s"
-	}
-	if alert.descriptor == "" {
-		alert.descriptor = alert.name
-	}
-	body := fmt.Sprintf("%s averaged %.2f%s for the previous %v %s.", alert.descriptor, alert.val, alert.unit, alert.min, minutesLabel)
+	body := fmt.Sprintf(s.averagedBody, descriptor, alert.val, alert.unit, alert.min, s.minutesLabel(alert.min))
 
 	if err := am.setAlertTriggered(alert.alertData, alert.triggered); err != nil {
 		// app.Logger().Error("failed to save alert record", "err", err)
@@ -440,7 +444,7 @@ func (am *AlertManager) sendSystemAlert(alert SystemAlertData) {
 		Title:    subject,
 		Message:  body,
 		Link:     am.hub.MakeLink("system", alert.systemRecord.Id),
-		LinkText: "View " + systemName,
+		LinkText: fmt.Sprintf(s.viewSystem, systemName),
 	})
 }
 

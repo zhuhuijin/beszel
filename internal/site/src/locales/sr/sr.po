@@ -1184,6 +1184,10 @@ msgstr "Неактивно"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Ако сте изгубили лозинку за ваш администраторски налог, можете је ресетовати користећи следећу команду."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Стање"
 msgid "Status"
 msgstr "Статус"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Подстање"
@@ -2171,6 +2179,10 @@ msgstr "Тест обавештење послато"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Ukupan status je <0>ok</0> kada su svi sistemi aktivni, <1>upozorenje</1> kada se aktiviraju upozorenja i <2>greška</2> kada je bilo koji sistem isključen."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Затим се пријавите на backend и ресетујте лозинку корисничког налога у табели корисника."
@@ -2267,6 +2279,10 @@ msgstr "Окида се када просечно оптерећење од 5 м
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Активира се када провера стања контејнера пријави нездраво стање"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Употреба"
 msgid "Usage of storage pool {displayName}"
 msgstr "Искоришћеност pool-а за складиштење {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Погледајте ваших 200 најновијих упозоре�
 msgid "Visible Fields"
 msgstr "Видљива поља"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Чека се довољно записа за приказ"

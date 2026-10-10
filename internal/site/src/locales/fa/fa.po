@@ -1184,6 +1184,10 @@ msgstr "بیکار"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "اگر رمز عبور حساب مدیر خود را گم کرده‌اید، می‌توانید آن را با استفاده از دستور زیر بازنشانی کنید."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "وضعیت"
 msgid "Status"
 msgstr "وضعیت"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "وضعیت فرعی"
@@ -2171,6 +2179,10 @@ msgstr "اعلان آزمایشی ارسال شد"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "وضعیت کلی زمانی <0>ok</0> است که همه سیستم‌ها بالا باشند، <1>warn</1> زمانی که هشدارها فعال شوند، و <2>error</2> زمانی که هر سیستمی پایین باشد."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "سپس وارد بخش پشتیبان شوید و رمز عبور حساب کاربری خود را در جدول کاربران بازنشانی کنید."
@@ -2267,6 +2279,10 @@ msgstr "هنگامی که میانگین بار ۵ دقیقه‌ای از یک �
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "هنگامی فعال می‌شود که بررسی سلامت کانتینر وضعیت ناسالم را گزارش کند"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "میزان استفاده"
 msgid "Usage of storage pool {displayName}"
 msgstr "استفاده از استخر ذخیره‌سازی {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "۲۰۰ هشدار اخیر خود را مشاهده کنید."
 msgid "Visible Fields"
 msgstr "فیلدهای قابل مشاهده"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "در انتظار رکوردهای کافی برای نمایش"

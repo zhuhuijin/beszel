@@ -1184,6 +1184,10 @@ msgstr "Neaktivna"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Če ste izgubili geslo za svoj skrbniški račun, ga lahko ponastavite z naslednjim ukazom."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Stanje"
 msgid "Status"
 msgstr "Stanje"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Podstanje"
@@ -2171,6 +2179,10 @@ msgstr "Testno obvestilo je poslano"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Splošno stanje je <0>v redu</0>, ko vsi sistemi delujejo, <1>opozorilo</1>, ko se sprožijo opozorila, in <2>napaka</2>, ko kateri koli sistem ne deluje."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Nato se prijavite v zaledni sistem in ponastavite geslo svojega uporabniškega računa v tabeli uporabnikov."
@@ -2267,6 +2279,10 @@ msgstr "Sproži se, ko 5-minutna povprečna obremenitev preseže prag"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Sproži se, ko preverjanje stanja vsebnika sporoči nezdravo stanje"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Uporaba"
 msgid "Usage of storage pool {displayName}"
 msgstr "Uporaba shranjevalnega poola {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Oglejte si svojih 200 najnovejših opozoril."
 msgid "Visible Fields"
 msgstr "Vidna polja"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Čakam na dovolj zapisov za prikaz"

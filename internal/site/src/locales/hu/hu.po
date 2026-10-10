@@ -1184,6 +1184,10 @@ msgstr "Tétlen"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Ha elvesztette az admin fiók jelszavát, a következő paranccsal állíthatja vissza."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Állapot"
 msgid "Status"
 msgstr "Állapot"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Részállapot"
@@ -2171,6 +2179,10 @@ msgstr "Teszt értesítés elküldve"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Az összesített állapot <0>ok</0>, ha minden rendszer fut, <1>warn</1>, ha riasztások léptek fel, és <2>error</2>, ha bármelyik rendszer leállt."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Ezután jelentkezzen be a backendbe, és állítsa vissza a felhasználói fiók jelszavát a felhasználók táblázatban."
@@ -2267,6 +2279,10 @@ msgstr "Riaszt, ha az 5 perces terhelési átlag túllép egy küszöbértéket"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Akkor aktiválódik, amikor egy konténer állapotellenőrzése hibás állapotot jelez"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Használat"
 msgid "Usage of storage pool {displayName}"
 msgstr "A(z) {displayName} tárolókészlet kihasználtsága"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Legfrissebb 200 riasztásod áttekintése."
 msgid "Visible Fields"
 msgstr "Látható mezők"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Elegendő rekordra várva a megjelenítéshez"

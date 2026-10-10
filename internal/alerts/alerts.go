@@ -73,18 +73,18 @@ type SystemAlertZfsPool struct {
 }
 
 type SystemAlertData struct {
-	systemRecord *core.Record
-	alertData    CachedAlertData
-	name         string
-	unit         string
-	val          float64
-	threshold    float64
-	triggered    bool
-	time         time.Time
-	count        uint8
-	min          uint8
-	mapSums      map[string]float32
-	descriptor   string // override descriptor in notification body (for temp sensor, disk partition, etc)
+	systemRecord  *core.Record
+	alertData     CachedAlertData
+	name          string
+	unit          string
+	val           float64
+	threshold     float64
+	triggered     bool
+	time          time.Time
+	count         uint8
+	min           uint8
+	mapSums       map[string]float32
+	descriptorKey string // raw key of the max disk/sensor, formatted into the notification body per user language
 }
 
 // notification services that support title param

@@ -1179,6 +1179,10 @@ msgstr "Idle"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "If you've lost the password to your admin account, you may reset it using the following command."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr "Ignore TLS certificate errors"
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2052,6 +2056,10 @@ msgstr "State"
 msgid "Status"
 msgstr "Status"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr "Storage Pool"
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Sub State"
@@ -2166,6 +2174,10 @@ msgstr "Test notification sent"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr "The storage pool is degraded or unavailable"
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Then log into the backend and reset your user account password in the users table."
@@ -2262,6 +2274,10 @@ msgstr "Triggers when 5 minute load average exceeds a threshold"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Triggers when a container's health check reports unhealthy"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr "Triggers when a ZFS storage pool becomes degraded or unavailable"
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2408,6 +2424,10 @@ msgstr "Usage"
 msgid "Usage of storage pool {displayName}"
 msgstr "Usage of storage pool {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr "Use for self-signed certificates."
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2458,6 +2478,7 @@ msgstr "View your 200 most recent alerts."
 msgid "Visible Fields"
 msgstr "Visible Fields"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Waiting for enough records to display"

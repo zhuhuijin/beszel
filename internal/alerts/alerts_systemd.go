@@ -107,13 +107,15 @@ func (am *AlertManager) sendSystemdAlert(triggered bool, systemName string, aler
 		return err
 	}
 
+	s := notificationStringsFor(userNotificationLang(am.hub, alertData.UserID))
+
 	var title, message string
 	if triggered {
-		title = fmt.Sprintf("Failed services on %s %v", systemName, "\U0001F534") // Red alert emoji
-		message = fmt.Sprintf("%s on %s: %s", pluralizeServices(len(failed)), systemName, formatServiceList(failed))
+		title = fmt.Sprintf(s.failedServicesTitle, systemName) + " \U0001F534" // Red alert emoji
+		message = fmt.Sprintf(s.failedServicesBody, s.failedServiceCount(len(failed)), systemName, formatServiceList(failed, s))
 	} else {
-		title = fmt.Sprintf("Services recovered on %s %v", systemName, "✅") // Green checkmark emoji
-		message = fmt.Sprintf("No services are in the failed state on %s.", systemName)
+		title = fmt.Sprintf(s.servicesRecoveredTitle, systemName) + " ✅" // Green checkmark emoji
+		message = fmt.Sprintf(s.noFailedServices, systemName)
 	}
 
 	systemID := alertData.SystemID
@@ -124,25 +126,17 @@ func (am *AlertManager) sendSystemdAlert(triggered bool, systemName string, aler
 		Title:    title,
 		Message:  message,
 		Link:     am.hub.MakeLink("system", systemID),
-		LinkText: "View " + systemName,
+		LinkText: fmt.Sprintf(s.viewSystem, systemName),
 	})
 }
 
-// pluralizeServices returns a count label like "1 failed service" or "3 failed services".
-func pluralizeServices(count int) string {
-	if count == 1 {
-		return "1 failed service"
-	}
-	return fmt.Sprintf("%d failed services", count)
-}
-
 // formatServiceList joins service names, truncating long lists.
-func formatServiceList(names []string) string {
+func formatServiceList(names []string, s notificationStrings) string {
 	if len(names) <= maxListedServices {
 		return strings.Join(names, ", ")
 	}
 	remaining := len(names) - maxListedServices
-	return fmt.Sprintf("%s and %d more", strings.Join(names[:maxListedServices], ", "), remaining)
+	return fmt.Sprintf(s.andMoreServices, strings.Join(names[:maxListedServices], ", "), remaining)
 }
 
 // resolveSystemdAlerts resolves triggered systemd alerts for systems that no longer

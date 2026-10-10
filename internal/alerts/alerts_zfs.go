@@ -51,25 +51,26 @@ func (am *AlertManager) handleZfsPoolHealthAlert(e *core.RecordEvent, oldHealth 
 		poolName = e.Record.GetString("name")
 	}
 
-	title := fmt.Sprintf("Storage pool %s on %s: %s", newHealth, systemName, poolName)
-	message := fmt.Sprintf("Storage pool %s (%s) was first observed as %s", poolName, systemName, newHealth)
-	if oldSeverity > 0 {
-		message = fmt.Sprintf("Storage pool %s (%s) health changed from %s to %s", poolName, systemName, oldHealth, newHealth)
-	}
-
 	userIDs := systemRecord.GetStringSlice("users")
 	if len(userIDs) == 0 {
 		return e.Next()
 	}
 
 	for _, userID := range userIDs {
+		s := notificationStringsFor(userNotificationLang(e.App, userID))
+		title := fmt.Sprintf(s.poolTitle, s.poolHealth(newHealth), systemName, poolName)
+		message := fmt.Sprintf(s.poolFirstSeen, poolName, systemName, s.poolHealth(newHealth))
+		if oldSeverity > 0 {
+			message = fmt.Sprintf(s.poolHealthChange, poolName, systemName, s.poolHealth(oldHealth), s.poolHealth(newHealth))
+		}
+
 		if err := am.SendAlert(AlertMessageData{
 			UserID:   userID,
 			SystemID: systemID,
 			Title:    title,
 			Message:  message,
 			Link:     am.hub.MakeLink("system", systemID),
-			LinkText: "View " + systemName,
+			LinkText: fmt.Sprintf(s.viewSystem, systemName),
 		}); err != nil {
 			e.App.Logger().Error("Failed to send ZFS alert", "err", err, "userID", userID)
 		}
@@ -108,6 +109,10 @@ func zfsPoolSeverity(health string) int {
 	}
 }
 
+// zfsPoolHistoryName is the alerts_history.name value for ZFS pool alerts;
+// the pool name is stored in monitor_name so the UI can localize the label.
+const zfsPoolHistoryName = "StoragePool"
+
 // createZfsPoolHistoryRecord logs a pool health alert in the alerts history so
 // it is visible in the UI without creating an editable alert configuration.
 func createZfsPoolHistoryRecord(app core.App, userID, systemID, alertID, poolName string) error {
@@ -119,7 +124,8 @@ func createZfsPoolHistoryRecord(app core.App, userID, systemID, alertID, poolNam
 	record.Set("user", userID)
 	record.Set("system", systemID)
 	record.Set("alert_id", alertID)
-	record.Set("name", "Storage Pool: "+poolName)
+	record.Set("name", zfsPoolHistoryName)
+	record.Set("monitor_name", poolName)
 	return app.Save(record)
 }
 

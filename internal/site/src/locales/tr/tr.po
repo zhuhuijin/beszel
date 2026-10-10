@@ -1184,6 +1184,10 @@ msgstr "Boşta"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Yönetici hesabınızın şifresini kaybettiyseniz, aşağıdaki komutu kullanarak sıfırlayabilirsiniz."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Durum"
 msgid "Status"
 msgstr "Durum"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Alt Durum"
@@ -2171,6 +2179,10 @@ msgstr "Test bildirimi gönderildi"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Tüm sistemler çalışırken genel durum <0>ok</0>, uyarılar tetiklendiğinde <1>uyarı</1> ve herhangi bir sistem çöktüğünde <2>hata</2> şeklindedir."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Ardından arka uca giriş yapın ve kullanıcılar tablosunda kullanıcı hesabı şifrenizi sıfırlayın."
@@ -2267,6 +2279,10 @@ msgstr "5 dakikalık yük ortalaması bir eşiği aştığında tetiklenir"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Bir konteyner sağlık kontrolü sağlıksız durum bildirdiğinde tetiklenir"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Kullanım"
 msgid "Usage of storage pool {displayName}"
 msgstr "Depolama pool'u {displayName} kullanımı"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "En son 200 uyarınızı görüntüleyin."
 msgid "Visible Fields"
 msgstr "Görünür Alanlar"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Görüntülemek için yeterli kayıt bekleniyor"

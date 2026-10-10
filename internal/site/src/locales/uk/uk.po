@@ -1184,6 +1184,10 @@ msgstr "Неактивна"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Якщо ви втратили пароль до свого адміністративного облікового запису, ви можете скинути його за допомогою наступної команди."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "Стан"
 msgid "Status"
 msgstr "Статус"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "Підстан"
@@ -2171,6 +2179,10 @@ msgstr "Тестове сповіщення надіслано"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "Загальний статус: <0>ok</0>, коли всі системи працюють, <1>попередження</1>, коли спрацювали сповіщення, і <2>помилка</2>, коли будь-яка система відключена."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Потім увійдіть у бекенд і скиньте пароль вашого облікового запису користувача в таблиці користувачів."
@@ -2267,6 +2279,10 @@ msgstr "Спрацьовує, коли середнє навантаження �
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "Спрацьовує, коли перевірка стану контейнера повідомляє про нездоровий стан"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "Використання"
 msgid "Usage of storage pool {displayName}"
 msgstr "Використання пулу сховища {displayName}"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "Переглянути 200 останніх сповіщень."
 msgid "Visible Fields"
 msgstr "Видимі стовпці"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "Очікування достатньої кількості записів для відображення"

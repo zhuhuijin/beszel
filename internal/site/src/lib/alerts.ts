@@ -142,6 +142,13 @@ export const alertInfo: Record<string, AlertInfo> = {
     noDuration: true,
     noThreshold: true,
   },
+  StoragePool: {
+    name: () => t`Storage Pool`,
+    unit: "",
+    icon: HardDriveIcon,
+    desc: () => t`Triggers when a ZFS storage pool becomes degraded or unavailable`,
+    triggeredDesc: () => t`The storage pool is degraded or unavailable`,
+  },
 } as const
 
 /** Helper to manage user alerts */

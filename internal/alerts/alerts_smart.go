@@ -32,16 +32,7 @@ func (am *AlertManager) handleSmartDeviceAlert(e *core.RecordEvent) error {
 	systemName := systemRecord.GetString("name")
 	deviceName := e.Record.GetString("name")
 	model := e.Record.GetString("model")
-	statusLabel := smartStateLabel(newState)
-
-	// Build alert message
-	title := fmt.Sprintf("SMART %s on %s: %s %s", statusLabel, systemName, deviceName, smartStateEmoji(newState))
-	var message string
-	if model != "" {
-		message = fmt.Sprintf("Disk %s (%s) SMART status changed to %s", deviceName, model, newState)
-	} else {
-		message = fmt.Sprintf("Disk %s SMART status changed to %s", deviceName, newState)
-	}
+	emoji := smartStateEmoji(newState)
 
 	// Get users associated with the system
 	userIDs := systemRecord.GetStringSlice("users")
@@ -51,13 +42,25 @@ func (am *AlertManager) handleSmartDeviceAlert(e *core.RecordEvent) error {
 
 	// Send alert to each user
 	for _, userID := range userIDs {
+		s := notificationStringsFor(userNotificationLang(e.App, userID))
+		statusLabel := s.smartStateLabel(newState)
+
+		// Build alert message
+		title := fmt.Sprintf(s.smartTitle, statusLabel, systemName, deviceName, emoji)
+		var message string
+		if model != "" {
+			message = fmt.Sprintf(s.smartBodyModel, deviceName, model, s.smartStateName(newState))
+		} else {
+			message = fmt.Sprintf(s.smartBody, deviceName, s.smartStateName(newState))
+		}
+
 		if err := am.SendAlert(AlertMessageData{
 			UserID:   userID,
 			SystemID: systemID,
 			Title:    title,
 			Message:  message,
 			Link:     am.hub.MakeLink("system", systemID),
-			LinkText: "View " + systemName,
+			LinkText: fmt.Sprintf(s.viewSystem, systemName),
 		}); err != nil {
 			e.App.Logger().Error("Failed to send SMART alert", "err", err, "userID", userID)
 		}
@@ -97,11 +100,26 @@ func smartStateEmoji(state string) string {
 	}
 }
 
-func smartStateLabel(state string) string {
-	switch state {
-	case "FAILED":
-		return "failure"
-	default:
+// smartStateLabel returns the localized SMART state label used in alert titles.
+// English keeps the original behavior: "failure" for FAILED, lowercase otherwise.
+func (s notificationStrings) smartStateLabel(state string) string {
+	if s.smartStateLabels != nil {
+		if label, ok := s.smartStateLabels[state]; ok {
+			return label
+		}
 		return strings.ToLower(state)
 	}
+	if state == "FAILED" {
+		return "failure"
+	}
+	return strings.ToLower(state)
+}
+
+// smartStateName returns the localized SMART state for alert bodies.
+// English keeps the raw state value.
+func (s notificationStrings) smartStateName(state string) string {
+	if label, ok := s.smartStateLabels[state]; ok {
+		return label
+	}
+	return state
 }

@@ -191,15 +191,19 @@ func (am *AlertManager) evaluateNetworkMonitorAlerts(app core.App, systemID stri
 						delete(states, m.Id)
 					}
 					changed = true
-					state, comparison := "loss", "exceeds"
-					if !triggered {
-						state, comparison = "recovered", "is at or below"
+					s := notificationStringsFor(userNotificationLang(tx, alert.GetString("user")))
+					var title, message string
+					if triggered {
+						title = fmt.Sprintf(s.netLossTitle, system.GetString("name"), label)
+						message = fmt.Sprintf(s.netLossBody, label, system.GetString("name"), result.PacketLoss1h, alert.GetFloat("value"))
+					} else {
+						title = fmt.Sprintf(s.netRecoveredTitle, system.GetString("name"), label)
+						message = fmt.Sprintf(s.netRecoveredBody, label, system.GetString("name"), result.PacketLoss1h, alert.GetFloat("value"))
 					}
 					messages = append(messages, AlertMessageData{
 						UserID: alert.GetString("user"), SystemID: systemID,
-						Title:   fmt.Sprintf("Network monitor %s on %s: %s", state, system.GetString("name"), label),
-						Message: fmt.Sprintf("%s on %s: loss over the past hour is %.2f%%, which %s the %.2f%% threshold.", label, system.GetString("name"), result.PacketLoss1h, comparison, alert.GetFloat("value")),
-						Link:    am.hub.MakeLink("system", systemID), LinkText: "View " + system.GetString("name"),
+						Title: title, Message: message,
+						Link: am.hub.MakeLink("system", systemID), LinkText: fmt.Sprintf(s.viewSystem, system.GetString("name")),
 					})
 				}
 			}

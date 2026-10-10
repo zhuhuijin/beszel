@@ -91,7 +91,14 @@ export async function updateUserSettings() {
 	try {
 		const req = await pb.collection("user_settings").getFirstListItem("", { fields: "settings" })
 		hydrateUserSettings(req.settings)
-		dynamicActivate(req.settings.lang || getLocale())
+		if (req.settings.lang) {
+			dynamicActivate(req.settings.lang)
+		} else {
+			// no language saved yet: activate the browser's locale and persist it
+			// so notifications (email / webhook) can be localized too
+			dynamicActivate(getLocale())
+			queueUserSettings({ lang: getLocale() })
+		}
 		return
 	} catch (e) {
 		console.error("get settings", e)
@@ -100,7 +107,12 @@ export async function updateUserSettings() {
 	try {
 		const createdSettings = await pb.collection("user_settings").create({ user: pb.authStore.record?.id })
 		hydrateUserSettings(createdSettings.settings)
-		dynamicActivate(createdSettings.settings.lang || getLocale())
+		if (createdSettings.settings.lang) {
+			dynamicActivate(createdSettings.settings.lang)
+		} else {
+			dynamicActivate(getLocale())
+			queueUserSettings({ lang: getLocale() })
+		}
 	} catch (e) {
 		console.error("create settings", e)
 	}

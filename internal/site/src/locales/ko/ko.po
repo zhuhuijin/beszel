@@ -1184,6 +1184,10 @@ msgstr "대기"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "관리자 계정의 비밀번호를 잃어버린 경우, 다음 명령어를 사용하여 재설정할 수 있습니다."
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "상태"
 msgid "Status"
 msgstr "상태"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "하위 상태"
@@ -2171,6 +2179,10 @@ msgstr "테스트 알림이 전송되었습니다."
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "모든 시스템이 정상이면 <0>ok</0>, 알림이 트리거되면 <1>경고</1>, 시스템이 다운되면 <2>오류</2> 상태가 됩니다."
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "그런 다음 백엔드에 로그인하여 사용자 테이블에서 사용자 계정 비밀번호를 재설정하세요."
@@ -2267,6 +2279,10 @@ msgstr "5분 부하 평균이 임계값을 초과하면 트리거됩니다."
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "컨테이너 상태 검사가 비정상 상태를 보고하면 트리거됩니다"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr ""
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "사용량"
 msgid "Usage of storage pool {displayName}"
 msgstr "스토리지 풀 {displayName}의 사용량"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "최근 200개의 알림을 봅니다."
 msgid "Visible Fields"
 msgstr "표시할 열"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "표시할 충분한 기록을 기다리는 중"

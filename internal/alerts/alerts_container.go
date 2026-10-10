@@ -197,13 +197,14 @@ func (am *AlertManager) CancelPendingContainerAlerts(systemID string) {
 // error/fatal lines) for up to containerAlertMaxLogged of the affected containers.
 func (am *AlertManager) sendContainerHealthAlert(unhealthy bool, systemName string, alertData CachedAlertData, containers []containerAlertTarget, fetchLogs FetchContainerLogsFunc) error {
 	link := am.hub.MakeLink("system", alertData.SystemID)
-	linkText := "View " + systemName
+	s := notificationStringsFor(userNotificationLang(am.hub, alertData.UserID))
+	linkText := fmt.Sprintf(s.viewSystem, systemName)
 
 	if !unhealthy {
 		if err := am.setAlertTriggered(alertData, false); err != nil {
 			return err
 		}
-		title := fmt.Sprintf("%s containers are healthy ✅", systemName)
+		title := fmt.Sprintf(s.containersHealthy, systemName)
 		return am.SendAlert(AlertMessageData{
 			UserID:   alertData.UserID,
 			SystemID: alertData.SystemID,
@@ -221,18 +222,18 @@ func (am *AlertManager) sendContainerHealthAlert(unhealthy bool, systemName stri
 
 	var title string
 	if len(names) == 1 {
-		title = fmt.Sprintf("Unhealthy container %s on %s \U0001F534", names[0], systemName)
+		title = fmt.Sprintf(s.unhealthyContainer, names[0], systemName)
 	} else {
-		title = fmt.Sprintf("%d unhealthy containers on %s \U0001F534", len(names), systemName)
+		title = fmt.Sprintf(s.unhealthyContainers, len(names), systemName)
 	}
 
 	var body strings.Builder
-	fmt.Fprintf(&body, "Unhealthy: %s", strings.Join(names, ", "))
-	body.WriteString(am.buildContainerLogsSection(containers, fetchLogs))
+	fmt.Fprintf(&body, s.unhealthyList, strings.Join(names, ", "))
+	body.WriteString(am.buildContainerLogsSection(containers, fetchLogs, s))
 
 	message := body.String()
 	if len(message) > containerAlertMessageMaxChars {
-		message = message[:containerAlertMessageMaxChars] + "\n…(truncated)"
+		message = message[:containerAlertMessageMaxChars] + s.truncatedSuffix
 	}
 
 	claimed, err := am.claimPendingContainerAlert(alertData)
@@ -252,7 +253,7 @@ func (am *AlertManager) sendContainerHealthAlert(unhealthy bool, systemName stri
 
 // buildContainerLogsSection attempts to fetch and format log excerpts for up to
 // containerAlertMaxLogged unhealthy containers, to append to an alert message.
-func (am *AlertManager) buildContainerLogsSection(containers []containerAlertTarget, fetchLogs FetchContainerLogsFunc) string {
+func (am *AlertManager) buildContainerLogsSection(containers []containerAlertTarget, fetchLogs FetchContainerLogsFunc, s notificationStrings) string {
 	if fetchLogs == nil {
 		return ""
 	}
@@ -269,11 +270,11 @@ func (am *AlertManager) buildContainerLogsSection(containers []containerAlertTar
 		if excerpt == "" {
 			continue
 		}
-		fmt.Fprintf(&section, "\n\n%s logs:\n```\n%s\n```", c.name, excerpt)
+		fmt.Fprintf(&section, s.containerLogs+"\n%s\n```", c.name, excerpt)
 	}
 
 	if len(containers) > containerAlertMaxLogged {
-		fmt.Fprintf(&section, "\n\n(+%d more unhealthy container(s), logs omitted)", len(containers)-containerAlertMaxLogged)
+		fmt.Fprintf(&section, s.moreUnhealthy, len(containers)-containerAlertMaxLogged)
 	}
 
 	return section.String()

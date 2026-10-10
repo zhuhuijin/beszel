@@ -1184,6 +1184,10 @@ msgstr "閒置"
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "如果您遺失了管理員帳號密碼，可以使用以下指令重設。"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Ignore TLS certificate errors"
+msgstr ""
+
 #: src/components/containers-table/containers-table-columns.tsx
 msgctxt "Docker image"
 msgid "Image"
@@ -2057,6 +2061,10 @@ msgstr "狀態"
 msgid "Status"
 msgstr "狀態"
 
+#: src/lib/alerts.ts
+msgid "Storage Pool"
+msgstr "儲存池"
+
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
 msgstr "子狀態"
@@ -2171,6 +2179,10 @@ msgstr "測試通知已發送"
 msgid "The overall status is <0>ok</0> when all systems are up, <1>warn</1> when alerts are triggered, and <2>error</2> when any system is down."
 msgstr "當所有系統都正常運行時，整體狀態為 <0>正常</0>；當觸發警報時為 <1>警告</1>；當任何系統故障時為 <2>錯誤</2>。"
 
+#: src/lib/alerts.ts
+msgid "The storage pool is degraded or unavailable"
+msgstr "儲存池已降級或不可用"
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "然後登錄到後端並在用戶表中重置您的用戶帳戶密碼。"
@@ -2267,6 +2279,10 @@ msgstr "當 5 分鐘平均負載超過閾值時觸發"
 #: src/lib/alerts.ts
 msgid "Triggers when a container's health check reports unhealthy"
 msgstr "當容器健康檢查報告不健康狀態時觸發"
+
+#: src/lib/alerts.ts
+msgid "Triggers when a ZFS storage pool becomes degraded or unavailable"
+msgstr "當 ZFS 儲存池降級或不可用時觸發"
 
 #: src/lib/alerts.ts
 msgid "Triggers when any sensor exceeds a threshold"
@@ -2413,6 +2429,10 @@ msgstr "使用"
 msgid "Usage of storage pool {displayName}"
 msgstr "Pool {displayName} 的使用量"
 
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Use for self-signed certificates."
+msgstr ""
+
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/storage-pools-table.tsx
@@ -2463,6 +2483,7 @@ msgstr "檢視最近 200 則警報。"
 msgid "Visible Fields"
 msgstr "可見欄位"
 
+#: src/components/charts/chart-no-values.tsx
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
 msgstr "等待足夠的記錄以顯示"

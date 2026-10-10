@@ -153,7 +153,12 @@ func (am *AlertManager) sendStatusAlert(alertStatus string, systemName string, a
 		emoji = "\U0001F534" // Red alert emoji
 	}
 
-	title := fmt.Sprintf("Connection to %s is %s %v", systemName, alertStatus, emoji)
+	s := notificationStringsFor(userNotificationLang(am.hub, alertData.UserID))
+	titleFormat := s.connectionDown
+	if alertStatus == "up" {
+		titleFormat = s.connectionUp
+	}
+	title := fmt.Sprintf(titleFormat, systemName, emoji)
 	message := strings.TrimSuffix(title, emoji)
 
 	// Get system ID for the link
@@ -165,7 +170,7 @@ func (am *AlertManager) sendStatusAlert(alertStatus string, systemName string, a
 		Title:    title,
 		Message:  message,
 		Link:     am.hub.MakeLink("system", systemID),
-		LinkText: "View " + systemName,
+		LinkText: fmt.Sprintf(s.viewSystem, systemName),
 	})
 }
 
