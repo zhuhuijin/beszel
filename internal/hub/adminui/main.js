@@ -2,34 +2,14 @@
  * PocketBase superuser UI Chinese localization.
  *
  * Registered as a PocketBase UI extension (core.UIExtension) by the hub and
- * auto-loaded by the admin UI via /_/extensions.js. Translates UI chrome at
+ * auto-loaded by the admin UI via /_/extensions.js. Translation is applied at
  * runtime with an en->zh dictionary; unmatched strings fall back to English.
  *
- * Language resolution: the toggle button (localStorage "pb_admin_lang") wins,
- * then the Beszel site language setting (same-origin localStorage "lang"),
- * then the browser locale. Unmatched strings fall back to English.
+ * Always enabled — no language detection. UI chrome stays in Chinese while
+ * user data (collection/field/record values) is never touched.
  */
 (function () {
 	'use strict'
-
-	const LANG_KEY = 'pb_admin_lang'
-
-	let lang = 'en'
-	try {
-		const manual = localStorage.getItem(LANG_KEY)
-		if (manual) {
-			// explicit toggle on the admin page wins
-			lang = manual
-		} else if (localStorage.getItem('lang')) {
-			// follow the Beszel site language setting (same-origin localStorage "lang")
-			lang = /^zh/i.test(localStorage.getItem('lang')) ? 'zh' : 'en'
-		} else {
-			lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en'
-		}
-	} catch (e) {
-		lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en'
-	}
-	const enabled = lang === 'zh'
 
 	// --------------------------------------------------------------------
 	// Dictionary: exact matches (also used for placeholder/title/aria-label).
@@ -639,31 +619,6 @@
 	}
 
 	// --------------------------------------------------------------------
-	// Language toggle button
-	// --------------------------------------------------------------------
-	function ensureToggleButton() {
-		if (document.getElementById('pb-admin-lang-toggle')) return
-		const btn = document.createElement('button')
-		btn.id = 'pb-admin-lang-toggle'
-		btn.type = 'button'
-		btn.textContent = lang === 'zh' ? 'EN' : '中'
-		btn.title = '切换管理界面语言 / Toggle admin UI language'
-		btn.style.cssText = 'position:fixed;left:10px;bottom:10px;z-index:10000;' +
-			'opacity:.35;font-size:12px;line-height:1;padding:4px 10px;border-radius:999px;' +
-			'border:1px solid rgba(128,128,128,.45);background:rgba(127,127,127,.12);' +
-			'color:inherit;cursor:pointer;transition:opacity .15s'
-		btn.addEventListener('mouseenter', () => (btn.style.opacity = '1'))
-		btn.addEventListener('mouseleave', () => (btn.style.opacity = '.35'))
-		btn.addEventListener('click', () => {
-			try {
-				localStorage.setItem(LANG_KEY, lang === 'zh' ? 'en' : 'zh')
-			} catch (e) { /* ignore */ }
-			window.location.reload()
-		})
-		document.body.appendChild(btn)
-	}
-
-	// --------------------------------------------------------------------
 	// MutationObserver wiring
 	// --------------------------------------------------------------------
 	const pendingNodes = new Set()
@@ -685,11 +640,6 @@
 	}
 
 	function flush() {
-		ensureToggleButton()
-		if (!enabled) {
-			pendingNodes.clear()
-			return
-		}
 		const batch = Array.from(pendingNodes)
 		pendingNodes.clear()
 		for (let i = 0; i < batch.length; i++) {
@@ -703,7 +653,6 @@
 	}
 
 	function start() {
-		ensureToggleButton()
 		const observer = new MutationObserver((mutations) => {
 			for (let i = 0; i < mutations.length; i++) {
 				const m = mutations[i]
