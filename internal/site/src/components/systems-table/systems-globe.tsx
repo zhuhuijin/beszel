@@ -136,22 +136,36 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 		return { positioned, unpositioned }
 	}, [systems])
 
+	// clients per country, shown as ×N on the globe label
+	const countryCounts = useMemo(() => {
+		const counts = new Map<string, number>()
+		for (const system of positioned) {
+			const cc = system.location?.cc
+			if (cc) {
+				counts.set(cc, (counts.get(cc) ?? 0) + 1)
+			}
+		}
+		return counts
+	}, [positioned])
+
 	const markers = useMemo(
 		() =>
 			positioned.flatMap((system) => {
 				const location = system.location
 				if (!location || (location.lat === 0 && location.lng === 0)) return []
+				const cc = location.cc
 				return [
 					{
 						id: system.id,
 						lat: location.lat,
 						lng: location.lng,
 						color: STATUS_MARKER_COLORS[system.status] ?? STATUS_MARKER_COLORS.paused,
-						flag: location.cc,
+						flag: cc,
+						count: cc ? countryCounts.get(cc) : undefined,
 					},
 				]
 			}),
-		[positioned]
+		[positioned, countryCounts]
 	)
 
 	const statusCounts = useMemo(() => {

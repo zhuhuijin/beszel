@@ -15,6 +15,8 @@ export interface GlobeMarker {
 	color: string
 	/** ISO 3166-1 alpha-2 code; when set (and the flag font is ready) markers render as circular flag badges */
 	flag?: string
+	/** number of clients in this country; when > 1 the label shows ×N */
+	count?: number
 }
 
 export interface GlobePalette {
@@ -394,12 +396,24 @@ export class GlobeRenderer {
 		const flagR = 10 * s
 		const gap = 8 * s
 		const font = labelFont(s)
+		// one label per country, anchored to its front-most visible marker
+		const labelOwner = new Map<string, string>()
+		for (const m of this.projected) {
+			const marker = this.markerById.get(m.id)
+			if (marker?.flag) {
+				labelOwner.set(marker.flag, m.id)
+			}
+		}
 		for (const m of this.projected) {
 			const marker = this.markerById.get(m.id)
 			if (!marker?.flag || !flagFontReady) continue
+			if (labelOwner.get(marker.flag) !== m.id) continue
 			const cc = marker.flag.toUpperCase()
+			// same country with several clients: append the count, e.g. "DE ×2"
+			const count = marker.count ?? 1
+			const text = count > 1 ? `${cc} ×${count}` : cc
 			const anchor = anchors.get(m.id) ?? 5
-			const textWidth = measureText(cc, font)
+			const textWidth = measureText(text, font)
 			const w = Math.ceil(gap + flagR * 2 + 6 + textWidth + gap)
 			// position = pure function of the dot: right of it, flipped near the right
 			// edge, vertically centered on the dot, clamped to the canvas
@@ -445,12 +459,13 @@ export class GlobeRenderer {
 				ctx.lineWidth = 1
 				ctx.stroke()
 			}
-			const cc = marker?.flag?.toUpperCase() ?? ""
+			const count = marker?.count ?? 1
+			const text = marker?.flag ? `${marker.flag.toUpperCase()}${count > 1 ? ` ×${count}` : ""}` : ""
 			ctx.font = font
 			ctx.fillStyle = this.palette.labelText
 			ctx.textAlign = "left"
 			ctx.textBaseline = "middle"
-			ctx.fillText(cc, l.x + gap + flagR * 2 + 6, flagY + 0.5)
+			ctx.fillText(text, l.x + gap + flagR * 2 + 6, flagY + 0.5)
 		}
 	}
 
