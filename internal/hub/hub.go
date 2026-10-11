@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/henrygd/beszel/internal/alerts"
+	"github.com/henrygd/beszel/internal/hub/adminui"
 	"github.com/henrygd/beszel/internal/hub/backup"
 	"github.com/henrygd/beszel/internal/hub/config"
 	"github.com/henrygd/beszel/internal/hub/heartbeat"
@@ -76,6 +77,8 @@ func onAfterBootstrapAndMigrations(app core.App, fn func(app core.App) error) er
 // StartHub sets up event handlers and starts the PocketBase server
 func (h *Hub) StartHub() error {
 	h.App.OnServe().BindFunc(func(e *core.ServeEvent) error {
+		// register the superuser UI localization extension
+		adminui.Register(e)
 		// sync systems with config
 		if err := config.SyncSystems(e); err != nil {
 			return err
