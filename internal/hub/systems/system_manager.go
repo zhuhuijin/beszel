@@ -188,12 +188,17 @@ func (sm *SystemManager) onRecordAfterCreateSuccess(e *core.RecordEvent) error {
 }
 
 // onRecordUpdate is called before a system record is updated in the database.
-// It clears system info when the status is changed to paused.
+// It clears system info when the status is changed to paused, preserving the
+// cumulative network totals so accumulation continues after resuming.
 func (sm *SystemManager) onRecordUpdate(e *core.RecordEvent) error {
 	if e.Record.GetString("status") == paused {
 		var prevInfo system.Info
 		e.Record.UnmarshalJSONField("info", &prevInfo)
-		e.Record.Set("info", system.Info{AgentVersion: prevInfo.AgentVersion})
+		e.Record.Set("info", system.Info{
+			AgentVersion: prevInfo.AgentVersion,
+			NetTotal:     prevInfo.NetTotal,
+			NetTotalLast: prevInfo.NetTotalLast,
+		})
 	}
 	return e.Next()
 }

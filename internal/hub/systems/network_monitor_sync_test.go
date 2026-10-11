@@ -123,7 +123,7 @@ func TestNetworkMonitorReconnectSync(t *testing.T) {
 				go conn.ReadLoop()
 				select {
 				case wsConn := <-connections:
-					require.NoError(t, sm.AddWebSocketSystem(sys.Id, version, wsConn))
+					require.NoError(t, sm.AddWebSocketSystem(sys.Id, version, wsConn, "127.0.0.1"))
 				case <-time.After(3 * time.Second):
 					t.Fatal("websocket connection was not established")
 				}

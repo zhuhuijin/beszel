@@ -2312,6 +2312,14 @@ msgstr "每个接口的总接收数据量"
 msgid "Total data sent for each interface"
 msgstr "每个接口的总发送数据量"
 
+#: src/components/systems-table/systems-table-columns.tsx
+msgid "Total Received"
+msgstr "累计接收"
+
+#: src/components/systems-table/systems-table-columns.tsx
+msgid "Total Sent"
+msgstr "累计传送"
+
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O"
 msgid "Total time spent on read/write (can exceed 100%)"

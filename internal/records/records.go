@@ -359,6 +359,8 @@ func AverageSystemStatsSlice(records []system.Stats) system.Stats {
 		sum.MaxDiskIO[1] = max(sum.MaxDiskIO[1], stats.MaxDiskIO[1], stats.DiskIO[1])
 		sum.DiskIOTotal[0] = max(sum.DiskIOTotal[0], stats.DiskIOTotal[0])
 		sum.DiskIOTotal[1] = max(sum.DiskIOTotal[1], stats.DiskIOTotal[1])
+		sum.NetIOTotal[0] = max(sum.NetIOTotal[0], stats.NetIOTotal[0])
+		sum.NetIOTotal[1] = max(sum.NetIOTotal[1], stats.NetIOTotal[1])
 		for i := range stats.DiskIoStats {
 			sum.MaxDiskIoStats[i] = max(sum.MaxDiskIoStats[i], stats.MaxDiskIoStats[i], stats.DiskIoStats[i])
 		}

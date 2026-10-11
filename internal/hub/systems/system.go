@@ -335,6 +335,8 @@ func (sys *System) createRecords(data *system.CombinedData) (*core.Record, error
 		if len(data.Stats.GPUData) > 0 {
 			info.GpuPct = &data.Info.GpuPct
 		}
+		// maintain cumulative network totals that survive reboots
+		info.NetTotal, info.NetTotalLast = accumulateNetTotals(systemRecord, data.Stats.NetIOTotal)
 		systemRecord.Set("info", info)
 		if err := txApp.SaveNoValidate(systemRecord); err != nil {
 			return err
@@ -366,6 +368,24 @@ func (sys *System) createRecords(data *system.CombinedData) (*core.Record, error
 		}
 	}
 	return systemRecord, err
+}
+
+// accumulateNetTotals maintains persistent cumulative network totals (across reboots) from the raw
+// NIC counters reported by the agent. The previous total and counter snapshot are read from the
+// system record's info JSON. A counter lower than the last snapshot means the OS counters were
+// reset (reboot or NIC reset), so the current value is counted as a fresh delta instead.
+func accumulateNetTotals(record *core.Record, cur [2]uint64) (netTotal, netTotalLast [2]uint64) {
+	var prev system.Info
+	record.UnmarshalJSONField("info", &prev)
+	netTotalLast = cur
+	for i := range cur {
+		delta := cur[i]
+		if cur[i] >= prev.NetTotalLast[i] {
+			delta = cur[i] - prev.NetTotalLast[i]
+		}
+		netTotal[i] = prev.NetTotal[i] + delta
+	}
+	return netTotal, netTotalLast
 }
 
 func createSystemDetailsRecord(app core.App, data *system.Details, systemId string) error {

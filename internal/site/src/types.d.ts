@@ -111,6 +111,8 @@ export interface SystemInfo {
 	rdn?: string
 	/** pending package updates [total, security] (security omitted if unknown) */
 	pu?: [number, number?]
+	/** cumulative network totals [sent, recv] bytes, persisted across reboots by the hub */
+	nt?: [number, number]
 }
 
 export interface SystemStats {

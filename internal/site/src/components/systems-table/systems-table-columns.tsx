@@ -11,6 +11,7 @@ import {
 	ClockArrowUp,
 	CopyIcon,
 	CpuIcon,
+	DownloadIcon,
 	HardDriveIcon,
 	MemoryStickIcon,
 	MoreHorizontalIcon,
@@ -21,12 +22,13 @@ import {
 	ServerIcon,
 	TerminalSquareIcon,
 	Trash2Icon,
+	UploadIcon,
 	WifiIcon,
 } from "lucide-react"
 import { memo, useMemo, useRef, useState } from "react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import { isReadOnlyUser, pb } from "@/lib/api"
-import { BatteryState, ConnectionType, connectionTypeLabels, MeterState, SystemStatus } from "@/lib/enums"
+import { BatteryState, ConnectionType, connectionTypeLabels, MeterState, SystemStatus, Unit } from "@/lib/enums"
 import { $longestSystemName, $userSettings } from "@/lib/stores"
 import {
 	cn,
@@ -272,6 +274,48 @@ export function SystemsTableColumns(viewMode: "table" | "grid" | "globe"): Colum
 				}
 				const userSettings = useStore($userSettings, { keys: ["unitNet"] })
 				const { value, unit } = formatBytes(val, true, userSettings.unitNet, false)
+				return (
+					<span className="tabular-nums whitespace-nowrap">
+						{decimalString(value, value >= 100 ? 1 : 2)} {unit}
+					</span>
+				)
+			},
+		},
+		{
+			accessorFn: ({ info, status }) => (status !== SystemStatus.Up ? undefined : info.nt?.[1]),
+			id: "netRxTotal",
+			name: () => t`Total Received`,
+			size: 0,
+			Icon: DownloadIcon,
+			header: sortableHeader,
+			sortUndefined: "last",
+			cell(info) {
+				const val = info.getValue() as number | undefined
+				if (val === undefined) {
+					return null
+				}
+				const { value, unit } = formatBytes(val, false, Unit.Bytes, false)
+				return (
+					<span className="tabular-nums whitespace-nowrap">
+						{decimalString(value, value >= 100 ? 1 : 2)} {unit}
+					</span>
+				)
+			},
+		},
+		{
+			accessorFn: ({ info, status }) => (status !== SystemStatus.Up ? undefined : info.nt?.[0]),
+			id: "netTxTotal",
+			name: () => t`Total Sent`,
+			size: 0,
+			Icon: UploadIcon,
+			header: sortableHeader,
+			sortUndefined: "last",
+			cell(info) {
+				const val = info.getValue() as number | undefined
+				if (val === undefined) {
+					return null
+				}
+				const { value, unit } = formatBytes(val, false, Unit.Bytes, false)
 				return (
 					<span className="tabular-nums whitespace-nowrap">
 						{decimalString(value, value >= 100 ? 1 : 2)} {unit}

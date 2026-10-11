@@ -85,6 +85,8 @@ func (a *Agent) updateNetworkStats(cacheTimeMs uint16, systemStats *system.Stats
 	if netIO, err := psutilNet.IOCounters(true); err == nil {
 		nis, msElapsed := a.loadAndTickNetBaseline(cacheTimeMs)
 		totalBytesSent, totalBytesRecv := a.sumAndTrackPerNicDeltas(cacheTimeMs, msElapsed, netIO, systemStats)
+		// cumulative OS counters across all valid NICs ([total sent, total recv])
+		systemStats.NetIOTotal = [2]uint64{totalBytesSent, totalBytesRecv}
 		bytesSentPerSecond, bytesRecvPerSecond := a.computeBytesPerSecond(msElapsed, totalBytesSent, totalBytesRecv, nis)
 		a.applyNetworkTotals(cacheTimeMs, netIO, systemStats, nis, totalBytesSent, totalBytesRecv, bytesSentPerSecond, bytesRecvPerSecond)
 	}

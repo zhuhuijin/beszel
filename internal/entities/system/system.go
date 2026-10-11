@@ -64,7 +64,7 @@ type Stats struct {
 	ZfsPools          map[string]*ZfsPool  `json:"z,omitempty" cbor:"39,keyasint,omitempty"`  // ZFS pool metrics, keyed by pool name
 	DiskIOTotal       [2]uint64            `json:"diot,omitzero" cbor:"38,keyasint,omitzero"` // [total read bytes, total write bytes] cumulative device counters
 	WiFi              map[string]int8      `json:"wf,omitempty" cbor:"40,keyasint,omitempty"` // RSSI dBm keyed by interface; unavailable readings omitted
-
+	NetIOTotal        [2]uint64            `json:"niot,omitzero" cbor:"41,keyasint,omitzero"` // [total sent bytes, total recv bytes] cumulative NIC counters
 }
 
 // ZfsPool holds per-pool ZFS metrics for a single collection interval.
@@ -195,6 +195,9 @@ type Info struct {
 	PackageUpdates []uint16           `json:"pu,omitempty" cbor:"25,keyasint,omitempty"`  // [totalUpdates, securityUpdates] (security omitted if unknown)
 	WiFi           map[string]WiFi    `json:"wf,omitempty" cbor:"26,keyasint,omitempty"`  // connected Wi-Fi interfaces
 	SystemdLogs    bool               `json:"jl,omitempty" cbor:"27,keyasint,omitempty"`  // agent can read the system journal
+
+	NetTotal     [2]uint64 `json:"nt,omitzero" cbor:"28,keyasint,omitzero"` // [total sent bytes, total recv bytes] cumulative across reboots (maintained by hub)
+	NetTotalLast [2]uint64 `json:"nl,omitzero" cbor:"29,keyasint,omitzero"` // last raw NIC counter snapshot used to compute NetTotal deltas
 }
 
 // Data that does not change during process lifetime and is not needed in All Systems table

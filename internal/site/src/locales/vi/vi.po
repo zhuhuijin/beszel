@@ -2312,6 +2312,14 @@ msgstr "Tổng dữ liệu nhận được cho mỗi giao diện"
 msgid "Total data sent for each interface"
 msgstr "Tổng dữ liệu gửi đi cho mỗi giao diện"
 
+#: src/components/systems-table/systems-table-columns.tsx
+msgid "Total Received"
+msgstr ""
+
+#: src/components/systems-table/systems-table-columns.tsx
+msgid "Total Sent"
+msgstr ""
+
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O"
 msgid "Total time spent on read/write (can exceed 100%)"
