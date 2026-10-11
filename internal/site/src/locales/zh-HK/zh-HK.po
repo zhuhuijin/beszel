@@ -242,13 +242,13 @@ msgstr "您確定嗎？"
 msgid "Automatic copy requires a secure context."
 msgstr "自動複製需要安全的上下文。"
 
-#: src/components/routes/system/storage-pools-table.tsx
-msgctxt "Disk space available"
+#. Package version available to install
+#: src/components/routes/system/package-updates-table.tsx
 msgid "Available"
 msgstr "可用"
 
-#. Package version available to install
-#: src/components/routes/system/package-updates-table.tsx
+#: src/components/routes/system/storage-pools-table.tsx
+msgctxt "Disk space available"
 msgid "Available"
 msgstr "可用"
 
@@ -835,9 +835,14 @@ msgstr "Docker 網絡 I/O"
 msgid "Documentation"
 msgstr "文件"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "down"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -850,6 +855,10 @@ msgstr "中斷 ({downSystemsLength})"
 #: src/components/routes/system/network-sheet.tsx
 msgid "Download"
 msgstr "下載"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "DSK"
+msgstr "磁碟"
 
 #: src/components/alerts-history-columns.tsx
 msgid "Duration"
@@ -901,6 +910,10 @@ msgstr "要 ping 的端點 URL (必填)"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Enter a domain name to look up. Put the resolver's IP in DNS Server."
 msgstr "輸入要查詢的網域名稱。請將解析器的 IP 填入 DNS 伺服器。"
+
+#: src/components/add-system.tsx
+msgid "Enter coordinates as \"latitude,longitude\", e.g. \"39.9,116.4\"."
+msgstr ""
 
 #: src/components/login/login.tsx
 msgid "Enter email address to reset password"
@@ -1100,6 +1113,14 @@ msgstr "一般"
 msgid "Global"
 msgstr "全域"
 
+#: src/components/systems-table/systems-table.tsx
+msgid "Globe"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Globe view of all systems. Drag to rotate, scroll to zoom."
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "GPU"
 msgstr ""
@@ -1217,6 +1238,10 @@ msgstr "間隔 (秒)"
 msgid "Invalid email address."
 msgstr "無效的電子郵件地址。"
 
+#: src/components/add-system.tsx
+msgid "Invalid location"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "語言"
@@ -1267,6 +1292,14 @@ msgstr "載入狀態"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "載入中..."
+
+#: src/components/add-system.tsx
+msgid "Location"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Location not set"
+msgstr ""
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1330,6 +1363,10 @@ msgstr "一分鐘內最大值"
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 msgid "Max 1h"
 msgstr "1 小時最大"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "MEM"
+msgstr "記憶體"
 
 #: src/components/containers-table/containers-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
@@ -1472,7 +1509,12 @@ msgstr "沒有結果。"
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "此裝置沒有可用的 S.M.A.R.T. 屬性。"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "No system locations yet. The hub locates systems automatically from their agent's connection IP (public addresses only); you can also set a location manually in the edit system dialog."
+msgstr ""
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
@@ -1539,6 +1581,11 @@ msgstr "開啟選單"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Optional. Defaults to the agent's system resolver."
 msgstr "選填。預設為 Agent 的系統解析器。"
+
+#. Coordinates for the globe view, 'latitude,longitude' format
+#: src/components/add-system.tsx
+msgid "Optional. Used by the globe view; leave empty to locate automatically from the agent's connection IP."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
@@ -1618,6 +1665,11 @@ msgstr "修補"
 msgid "Pause"
 msgstr "暫停"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pause rotation"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "已暫停"
@@ -1629,6 +1681,10 @@ msgstr "已暫停 ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "負載 (Payload) 格式"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pending"
+msgstr "待定"
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1812,6 +1868,10 @@ msgstr "需要"
 msgid "Reset Password"
 msgstr "重設密碼"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Reset view"
+msgstr ""
+
 #: src/components/alerts-history-columns.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1837,6 +1897,10 @@ msgstr "重啟次數"
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "恢復"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Resume rotation"
+msgstr ""
 
 #. Package version
 #: src/components/routes/system/package-updates-table.tsx
@@ -2120,6 +2184,10 @@ msgstr "系統"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "系統可以在您的數據目錄中的<0>config.yml</0>文件中管理。"
 
+#: src/components/systems-table/systems-globe.tsx
+#~ msgid "Systems without a location"
+#~ msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "表格"
@@ -2369,8 +2437,13 @@ msgstr "未知"
 msgid "Unlimited"
 msgstr "無限制"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "up"
+msgstr ""
+
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "上線"
@@ -2558,3 +2631,11 @@ msgstr "是"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "您的用戶設置已更新。"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom in"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom out"
+msgstr ""

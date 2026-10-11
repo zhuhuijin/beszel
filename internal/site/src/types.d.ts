@@ -23,12 +23,32 @@ export interface FingerprintRecord extends RecordModel {
 	}
 }
 
+/** node location on the globe, geocoded by the hub or set manually */
+export interface SystemLocation {
+	/** latitude */
+	lat: number
+	/** longitude */
+	lng: number
+	/** public IP the coordinates were geocoded from */
+	ip?: string
+	/** city name from the geocoder, if provided */
+	city?: string
+	/** country name or code from the geocoder, if provided */
+	country?: string
+	/** ISO 3166-1 alpha-2 country code, used for the flag badge */
+	cc?: string
+	/** true when set manually via the system dialog (never overwritten by geocoding) */
+	manual?: boolean
+	updated?: string
+}
+
 export interface SystemRecord extends RecordModel {
 	name: string
 	host: string
 	status: "up" | "down" | "paused" | "pending"
 	port: string
 	info: SystemInfo
+	location?: SystemLocation
 	v: string
 	updated: string
 }
@@ -407,7 +427,7 @@ export interface UserSettings {
 	lang?: string
 	cols?: Record<string, boolean>
 	statusFilter?: "all" | "up" | "down" | "paused" | "pending"
-	viewMode?: "table" | "grid"
+	viewMode?: "table" | "grid" | "globe"
 	sortMode?: Array<{ id: string; desc: boolean }>
 	monitorCols?: Record<string, boolean>
 	monitorSortMode?: Array<{ id: string; desc: boolean }>

@@ -242,15 +242,15 @@ msgstr "Сигурни ли сте?"
 msgid "Automatic copy requires a secure context."
 msgstr "Автоматичното копиране изисква защитен контескт."
 
-#: src/components/routes/system/storage-pools-table.tsx
-msgctxt "Disk space available"
-msgid "Available"
-msgstr "Налично"
-
 #. Package version available to install
 #: src/components/routes/system/package-updates-table.tsx
 msgid "Available"
 msgstr "Налични"
+
+#: src/components/routes/system/storage-pools-table.tsx
+msgctxt "Disk space available"
+msgid "Available"
+msgstr "Налично"
 
 #: src/components/routes/system/chart-card.tsx
 msgid "Average"
@@ -835,9 +835,14 @@ msgstr "Мрежов I/O използван от docker"
 msgid "Documentation"
 msgstr "Документация"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "down"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -850,6 +855,10 @@ msgstr "Офлайн ({downSystemsLength})"
 #: src/components/routes/system/network-sheet.tsx
 msgid "Download"
 msgstr "Изтегляне"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "DSK"
+msgstr ""
 
 #: src/components/alerts-history-columns.tsx
 msgid "Duration"
@@ -901,6 +910,10 @@ msgstr "URL адрес на крайната точка за пинг (задъ�
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Enter a domain name to look up. Put the resolver's IP in DNS Server."
 msgstr "Въведете име на домейн за търсене. Поставете IP адреса на резолвъра в DNS сървър."
+
+#: src/components/add-system.tsx
+msgid "Enter coordinates as \"latitude,longitude\", e.g. \"39.9,116.4\"."
+msgstr ""
 
 #: src/components/login/login.tsx
 msgid "Enter email address to reset password"
@@ -1100,6 +1113,14 @@ msgstr "Общо"
 msgid "Global"
 msgstr "Глобален"
 
+#: src/components/systems-table/systems-table.tsx
+msgid "Globe"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Globe view of all systems. Drag to rotate, scroll to zoom."
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "GPU"
 msgstr ""
@@ -1217,6 +1238,10 @@ msgstr "Интервал (секунди)"
 msgid "Invalid email address."
 msgstr "Невалиден имейл адрес."
 
+#: src/components/add-system.tsx
+msgid "Invalid location"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Език"
@@ -1267,6 +1292,14 @@ msgstr "Състояние на зареждане"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Зареждане..."
+
+#: src/components/add-system.tsx
+msgid "Location"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Location not set"
+msgstr ""
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1330,6 +1363,10 @@ msgstr "Максимум 1 минута"
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 msgid "Max 1h"
 msgstr "Макс. 1h"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "MEM"
+msgstr ""
 
 #: src/components/containers-table/containers-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
@@ -1472,7 +1509,12 @@ msgstr "Няма резултати."
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "Няма налични S.M.A.R.T. атрибути за това устройство."
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "No system locations yet. The hub locates systems automatically from their agent's connection IP (public addresses only); you can also set a location manually in the edit system dialog."
+msgstr ""
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
@@ -1539,6 +1581,11 @@ msgstr "Отвори менюто"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Optional. Defaults to the agent's system resolver."
 msgstr "По избор. По подразбиране се използва системният резолвър на агента."
+
+#. Coordinates for the globe view, 'latitude,longitude' format
+#: src/components/add-system.tsx
+msgid "Optional. Used by the globe view; leave empty to locate automatically from the agent's connection IP."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
@@ -1618,6 +1665,11 @@ msgstr "Корекция"
 msgid "Pause"
 msgstr "Пауза"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pause rotation"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "На пауза"
@@ -1629,6 +1681,10 @@ msgstr "На пауза ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "Формат на полезния товар"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1812,6 +1868,10 @@ msgstr "Изисква"
 msgid "Reset Password"
 msgstr "Нулиране на парола"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Reset view"
+msgstr ""
+
 #: src/components/alerts-history-columns.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1837,6 +1897,10 @@ msgstr "Рестартирания"
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "Възобнови"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Resume rotation"
+msgstr ""
 
 #. Package version
 #: src/components/routes/system/package-updates-table.tsx
@@ -2120,6 +2184,10 @@ msgstr "Системи"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Системите могат да бъдат управлявани в <0>config.yml</0> файл намиращ се в директорията с данни."
 
+#: src/components/systems-table/systems-globe.tsx
+#~ msgid "Systems without a location"
+#~ msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "Таблица"
@@ -2369,8 +2437,13 @@ msgstr "Неизвестна"
 msgid "Unlimited"
 msgstr "Неограничено"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "up"
+msgstr ""
+
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "Нагоре"
@@ -2558,3 +2631,11 @@ msgstr "Да"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "Настройките за потребителя ти са обновени."
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom in"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom out"
+msgstr ""

@@ -13,6 +13,9 @@
 		"formatWithErrors": true
 	},
 	"assist": { "actions": { "source": { "organizeImports": "off" } } },
+	"files": {
+		"includes": ["**", "!src/components/systems-table/globe/globe-data.ts"]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {

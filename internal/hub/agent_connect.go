@@ -133,7 +133,7 @@ func (acr *agentConnectRequest) verifyWsConn(conn *gws.Conn, fpRecords []ws.Fing
 		return err
 	}
 
-	return acr.hub.sm.AddWebSocketSystem(fpRecord.SystemId, acr.agentSemVer, wsConn)
+	return acr.hub.sm.AddWebSocketSystem(fpRecord.SystemId, acr.agentSemVer, wsConn, getRealIP(acr.req))
 }
 
 // validateAgentHeaders extracts and validates the token and agent version from HTTP headers.

@@ -237,13 +237,13 @@ msgstr "Are you sure?"
 msgid "Automatic copy requires a secure context."
 msgstr "Automatic copy requires a secure context."
 
-#: src/components/routes/system/storage-pools-table.tsx
-msgctxt "Disk space available"
+#. Package version available to install
+#: src/components/routes/system/package-updates-table.tsx
 msgid "Available"
 msgstr "Available"
 
-#. Package version available to install
-#: src/components/routes/system/package-updates-table.tsx
+#: src/components/routes/system/storage-pools-table.tsx
+msgctxt "Disk space available"
 msgid "Available"
 msgstr "Available"
 
@@ -830,9 +830,14 @@ msgstr "Docker Network I/O"
 msgid "Documentation"
 msgstr "Documentation"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "down"
+msgstr "down"
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -845,6 +850,10 @@ msgstr "Down ({downSystemsLength})"
 #: src/components/routes/system/network-sheet.tsx
 msgid "Download"
 msgstr "Download"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "DSK"
+msgstr "DSK"
 
 #: src/components/alerts-history-columns.tsx
 msgid "Duration"
@@ -896,6 +905,10 @@ msgstr "Endpoint URL to ping (required)"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Enter a domain name to look up. Put the resolver's IP in DNS Server."
 msgstr "Enter a domain name to look up. Put the resolver's IP in DNS Server."
+
+#: src/components/add-system.tsx
+msgid "Enter coordinates as \"latitude,longitude\", e.g. \"39.9,116.4\"."
+msgstr "Enter coordinates as \"latitude,longitude\", e.g. \"39.9,116.4\"."
 
 #: src/components/login/login.tsx
 msgid "Enter email address to reset password"
@@ -1095,6 +1108,14 @@ msgstr "General"
 msgid "Global"
 msgstr "Global"
 
+#: src/components/systems-table/systems-table.tsx
+msgid "Globe"
+msgstr "Globe"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Globe view of all systems. Drag to rotate, scroll to zoom."
+msgstr "Globe view of all systems. Drag to rotate, scroll to zoom."
+
 #: src/components/routes/system.tsx
 msgid "GPU"
 msgstr "GPU"
@@ -1212,6 +1233,10 @@ msgstr "Interval (seconds)"
 msgid "Invalid email address."
 msgstr "Invalid email address."
 
+#: src/components/add-system.tsx
+msgid "Invalid location"
+msgstr "Invalid location"
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Language"
@@ -1262,6 +1287,14 @@ msgstr "Load state"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Loading..."
+
+#: src/components/add-system.tsx
+msgid "Location"
+msgstr "Location"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Location not set"
+msgstr "Location not set"
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1325,6 +1358,10 @@ msgstr "Max 1 min"
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 msgid "Max 1h"
 msgstr "Max 1h"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "MEM"
+msgstr "MEM"
 
 #: src/components/containers-table/containers-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
@@ -1467,7 +1504,12 @@ msgstr "No results."
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "No S.M.A.R.T. attributes available for this device."
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "No system locations yet. The hub locates systems automatically from their agent's connection IP (public addresses only); you can also set a location manually in the edit system dialog."
+msgstr "No system locations yet. The hub locates systems automatically from their agent's connection IP (public addresses only); you can also set a location manually in the edit system dialog."
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
@@ -1534,6 +1576,11 @@ msgstr "Open menu"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Optional. Defaults to the agent's system resolver."
 msgstr "Optional. Defaults to the agent's system resolver."
+
+#. Coordinates for the globe view, 'latitude,longitude' format
+#: src/components/add-system.tsx
+msgid "Optional. Used by the globe view; leave empty to locate automatically from the agent's connection IP."
+msgstr "Optional. Used by the globe view; leave empty to locate automatically from the agent's connection IP."
 
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
@@ -1613,6 +1660,11 @@ msgstr "Patch"
 msgid "Pause"
 msgstr "Pause"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pause rotation"
+msgstr "Pause rotation"
+
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "Paused"
@@ -1624,6 +1676,10 @@ msgstr "Paused ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "Payload format"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pending"
+msgstr "Pending"
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1807,6 +1863,10 @@ msgstr "Requires"
 msgid "Reset Password"
 msgstr "Reset Password"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Reset view"
+msgstr "Reset view"
+
 #: src/components/alerts-history-columns.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1832,6 +1892,10 @@ msgstr "Restarts"
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "Resume"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Resume rotation"
+msgstr "Resume rotation"
 
 #. Package version
 #: src/components/routes/system/package-updates-table.tsx
@@ -2115,6 +2179,10 @@ msgstr "Systems"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 
+#: src/components/systems-table/systems-globe.tsx
+#~ msgid "Systems without a location"
+#~ msgstr "Systems without a location"
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "Table"
@@ -2364,8 +2432,13 @@ msgstr "Unknown"
 msgid "Unlimited"
 msgstr "Unlimited"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "up"
+msgstr "up"
+
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "Up"
@@ -2553,3 +2626,11 @@ msgstr "Yes"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "Your user settings have been updated."
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom in"
+msgstr "Zoom in"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom out"
+msgstr "Zoom out"

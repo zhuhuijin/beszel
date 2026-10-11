@@ -23,6 +23,7 @@ import {
 	ArrowUpIcon,
 	EyeIcon,
 	FilterIcon,
+	GlobeIcon,
 	LayoutGridIcon,
 	LayoutListIcon,
 	Settings2Icon,
@@ -52,8 +53,9 @@ import AlertButton from "../alerts/alert-button"
 import { $router, Link } from "../router"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { SystemsTableColumns, ActionsButton, IndicatorDot } from "./systems-table-columns"
+import SystemsGlobeView from "./systems-globe"
 
-type ViewMode = "table" | "grid"
+type ViewMode = "table" | "grid" | "globe"
 type StatusFilter = "all" | SystemRecord["status"]
 
 const preloadSystemDetail = runOnce(() => import("@/components/routes/system.tsx"))
@@ -264,6 +266,10 @@ export default function SystemsTable() {
 												<LayoutGridIcon className="size-4" />
 												<Trans>Grid</Trans>
 											</DropdownMenuRadioItem>
+											<DropdownMenuRadioItem value="globe" onSelect={(e) => e.preventDefault()} className="gap-2">
+												<GlobeIcon className="size-4" />
+												<Trans>Globe</Trans>
+											</DropdownMenuRadioItem>
 										</DropdownMenuRadioGroup>
 									</div>
 
@@ -376,7 +382,10 @@ export default function SystemsTable() {
 	return (
 		<Card className="w-full px-3 py-5 sm:py-6 sm:px-6">
 			{CardHead}
-			{viewMode === "table" ? (
+			{viewMode === "globe" ? (
+				// globe layout
+				<SystemsGlobeView rows={rows} />
+			) : viewMode === "table" ? (
 				// table layout
 				<div className="rounded-md">
 					<AllSystemsTable table={table} rows={rows} colLength={visibleColumns.length} />

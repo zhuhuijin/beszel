@@ -293,6 +293,12 @@ func (sm *SystemManager) AddSystem(sys *System) error {
 	sys.data = &system.CombinedData{}
 	sm.systems.Set(sys.Id, sys)
 
+	// Best-effort geolocation from the host field (covers hub startup and SSH-only
+	// systems); connection-derived geolocation takes precedence.
+	if !sys.geoFromConnection.Load() {
+		sm.enqueueGeoRequest(geoRequest{systemId: sys.Id, host: sys.Host})
+	}
+
 	// Start monitoring in background
 	sm.updaters.Go(sys.StartUpdater)
 	return nil
@@ -345,7 +351,8 @@ func (sm *SystemManager) AddRecord(record *core.Record, system *System) (err err
 // AddWebSocketSystem creates and adds a system with an established WebSocket connection.
 // This method is called when an agent connects via WebSocket with valid authentication.
 // The system is immediately added to monitoring with the provided connection and version info.
-func (sm *SystemManager) AddWebSocketSystem(systemId string, agentVersion semver.Version, wsConn *ws.WsConn) error {
+// The agent's real connection IP is used for geolocation when it is a public address.
+func (sm *SystemManager) AddWebSocketSystem(systemId string, agentVersion semver.Version, wsConn *ws.WsConn, connIP string) error {
 	systemRecord, err := sm.hub.FindRecordById("systems", systemId)
 	if err != nil {
 		return err
@@ -356,6 +363,12 @@ func (sm *SystemManager) AddWebSocketSystem(systemId string, agentVersion semver
 	system.WsConn = wsConn
 	system.setAgentVersion(agentVersion)
 	system.monitorsNeedSync.Store(true)
+
+	if isGeolocatable(connIP) {
+		// Mark before AddRecord so the host-derived geocode request is skipped.
+		system.geoFromConnection.Store(true)
+		sm.enqueueGeoRequest(geoRequest{systemId: systemId, ip: connIP})
+	}
 
 	if err := sm.AddRecord(systemRecord, system); err != nil {
 		return err

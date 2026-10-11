@@ -53,6 +53,9 @@ type System struct {
 	agentVersion   atomic.Pointer[semver.Version] // Use getAgentVersion/setAgentVersion
 	updateTicker   *time.Ticker                   // Ticker for updating the system
 	detailsFetched atomic.Bool                    // True if static system details have been fetched and saved
+	// geoFromConnection is true once the system has been geolocated from a real
+	// agent connection IP, which takes precedence over the host field.
+	geoFromConnection atomic.Bool
 	smartFetching  atomic.Bool                    // True if SMART devices are currently being fetched
 	smartInterval  time.Duration                  // Interval for periodic SMART data updates
 	zfsFetching    atomic.Bool                    // True if ZFS pools are currently being fetched

@@ -18,8 +18,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { isReadOnlyUser, pb } from "@/lib/api"
 import { SystemStatus } from "@/lib/enums"
 import { $publicKey } from "@/lib/stores"
+import { toast } from "@/components/ui/use-toast"
 import { cn, generateToken, tokenMap, useBrowserStorage } from "@/lib/utils"
-import type { SystemRecord } from "@/types"
+import type { SystemLocation, SystemRecord } from "@/types"
 import {
 	copyDockerCompose,
 	copyDockerRun,
@@ -63,6 +64,27 @@ let nextSystemToken: string | null = null
  * @param {function} props.setOpen - Function to set the open state of the dialog.
  * @param {SystemRecord} [props.system] - Optional system record for editing an existing system.
  */
+/**
+ * Parses a "latitude,longitude" string into a manual SystemLocation, or null when empty.
+ * Throws when the value is present but not valid coordinates.
+ */
+function parseLocation(value: string): SystemLocation | null {
+	const trimmed = value.trim()
+	if (!trimmed) return null
+	const match = trimmed.match(/^(-?\d{1,3}(?:\.\d+)?)[,\s]+(-?\d{1,3}(?:\.\d+)?)$/)
+	const lat = match ? Number(match[1]) : NaN
+	const lng = match ? Number(match[2]) : NaN
+	if (Number.isNaN(lat) || Number.isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+		throw new Error(`invalid location: ${trimmed}`)
+	}
+	return { lat, lng, manual: true }
+}
+
+/** prefill for the manual location input, only when a location was set by hand */
+function formatManualLocation(location?: SystemLocation): string {
+	return location?.manual ? `${location.lat},${location.lng}` : ""
+}
+
 export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => void; system?: SystemRecord }) => {
 	const { t } = useLingui()
 	const publicKey = useStore($publicKey)
@@ -96,6 +118,24 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 		const formData = new FormData(e.target as HTMLFormElement)
 		const data = Object.fromEntries(formData) as Record<string, any>
 		data.users = pb.authStore.record!.id
+		// manual location override: "lat,lng"; empty clears a previous manual location
+		const locationInput = String(data.location ?? "")
+		delete data.location
+		try {
+			const location = parseLocation(locationInput)
+			if (location) {
+				data.location = location
+			} else if (system?.location?.manual) {
+				data.location = null
+			}
+		} catch {
+			toast({
+				title: t`Invalid location`,
+				description: t`Enter coordinates as "latitude,longitude", e.g. "39.9,116.4".`,
+				variant: "destructive",
+			})
+			return
+		}
 		try {
 			setOpen(false)
 			if (system) {
@@ -126,11 +166,7 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 			<Tabs defaultValue={tab} onValueChange={setTab}>
 				<DialogHeader>
 					<DialogTitle className="mb-1 pb-1 max-w-100 truncate pr-8">
-						{system ? (
-							<Trans>Edit System</Trans>
-						) : (
-							<Trans>Add System</Trans>
-						)}
+						{system ? <Trans>Edit System</Trans> : <Trans>Add System</Trans>}
 					</DialogTitle>
 					<TabsList className="grid w-full grid-cols-2">
 						<TabsTrigger value="docker">Docker</TabsTrigger>
@@ -202,6 +238,23 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 							required={!isUnixSocket}
 							className={cn(isUnixSocket && "hidden")}
 						/>
+						<Label htmlFor="location" className="xs:text-end whitespace-pre">
+							<Trans>Location</Trans>
+						</Label>
+						<div className={cn("grid gap-1", isUnixSocket && "xs:col-span-2")}>
+							<Input
+								id="location"
+								name="location"
+								defaultValue={formatManualLocation(system?.location)}
+								placeholder="39.9, 116.4"
+								className={cn(isUnixSocket && "max-w-64")}
+							/>
+							<p className="text-xs text-muted-foreground leading-snug">
+								<Trans comment="Coordinates for the globe view, 'latitude,longitude' format">
+									Optional. Used by the globe view; leave empty to locate automatically from the agent's connection IP.
+								</Trans>
+							</p>
+						</div>
 						<Label htmlFor="pkey" className="xs:text-end whitespace-pre">
 							<Trans comment="Use 'Key' if your language requires many more characters">Public Key</Trans>
 						</Label>
@@ -264,13 +317,7 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 							/>
 						</TabsContent>
 						{/* Save */}
-						<Button>
-							{system ? (
-								<Trans>Save System</Trans>
-							) : (
-								<Trans>Add System</Trans>
-							)}
-						</Button>
+						<Button>{system ? <Trans>Save System</Trans> : <Trans>Add System</Trans>}</Button>
 					</DialogFooter>
 				</form>
 			</Tabs>

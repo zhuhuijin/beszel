@@ -96,10 +96,10 @@ function getMeterStateByThresholds(value: number, warn = 65, crit = 90): MeterSt
 }
 
 /**
- * @param viewMode - "table" or "grid"
+ * @param viewMode - "table", "grid", or "globe"
  * @returns - Column definitions for the systems table
  */
-export function SystemsTableColumns(viewMode: "table" | "grid"): ColumnDef<SystemRecord>[] {
+export function SystemsTableColumns(viewMode: "table" | "grid" | "globe"): ColumnDef<SystemRecord>[] {
 	return [
 		{
 			// size: 200,

@@ -242,15 +242,15 @@ msgstr "Är du säker?"
 msgid "Automatic copy requires a secure context."
 msgstr "Automatisk kopiering kräver en säker kontext."
 
-#: src/components/routes/system/storage-pools-table.tsx
-msgctxt "Disk space available"
-msgid "Available"
-msgstr "Tillgängligt"
-
 #. Package version available to install
 #: src/components/routes/system/package-updates-table.tsx
 msgid "Available"
 msgstr "Tillgänglig"
+
+#: src/components/routes/system/storage-pools-table.tsx
+msgctxt "Disk space available"
+msgid "Available"
+msgstr "Tillgängligt"
 
 #: src/components/routes/system/chart-card.tsx
 msgid "Average"
@@ -835,9 +835,14 @@ msgstr "Docker Nätverks-I/O"
 msgid "Documentation"
 msgstr "Dokumentation"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "down"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -850,6 +855,10 @@ msgstr "Nere ({downSystemsLength})"
 #: src/components/routes/system/network-sheet.tsx
 msgid "Download"
 msgstr "Ladda ner"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "DSK"
+msgstr ""
 
 #: src/components/alerts-history-columns.tsx
 msgid "Duration"
@@ -901,6 +910,10 @@ msgstr "Slutpunkts-URL att pinga (krävs)"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Enter a domain name to look up. Put the resolver's IP in DNS Server."
 msgstr "Ange ett domännamn att slå upp. Ange resolverns IP i DNS-server."
+
+#: src/components/add-system.tsx
+msgid "Enter coordinates as \"latitude,longitude\", e.g. \"39.9,116.4\"."
+msgstr ""
 
 #: src/components/login/login.tsx
 msgid "Enter email address to reset password"
@@ -1100,6 +1113,14 @@ msgstr "Allmänt"
 msgid "Global"
 msgstr ""
 
+#: src/components/systems-table/systems-table.tsx
+msgid "Globe"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Globe view of all systems. Drag to rotate, scroll to zoom."
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "GPU"
 msgstr ""
@@ -1217,6 +1238,10 @@ msgstr "Intervall (sekunder)"
 msgid "Invalid email address."
 msgstr "Ogiltig e-postadress."
 
+#: src/components/add-system.tsx
+msgid "Invalid location"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Språk"
@@ -1267,6 +1292,14 @@ msgstr "Laddningstillstånd"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Laddar..."
+
+#: src/components/add-system.tsx
+msgid "Location"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Location not set"
+msgstr ""
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1330,6 +1363,10 @@ msgstr ""
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 msgid "Max 1h"
 msgstr "Max. 1 tim"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "MEM"
+msgstr ""
 
 #: src/components/containers-table/containers-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
@@ -1472,7 +1509,12 @@ msgstr "Inga resultat."
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "Inga S.M.A.R.T.-attribut tillgängliga för den här enheten."
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "No system locations yet. The hub locates systems automatically from their agent's connection IP (public addresses only); you can also set a location manually in the edit system dialog."
+msgstr ""
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
@@ -1539,6 +1581,11 @@ msgstr "Öppna menyn"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 msgid "Optional. Defaults to the agent's system resolver."
 msgstr "Valfritt. Använder som standard agentens systemresolver."
+
+#. Coordinates for the globe view, 'latitude,longitude' format
+#: src/components/add-system.tsx
+msgid "Optional. Used by the globe view; leave empty to locate automatically from the agent's connection IP."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
@@ -1618,6 +1665,11 @@ msgstr ""
 msgid "Pause"
 msgstr "Paus"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pause rotation"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "Pausad"
@@ -1629,6 +1681,10 @@ msgstr "Pausad ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "Nyttolastformat"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1812,6 +1868,10 @@ msgstr "Kräver"
 msgid "Reset Password"
 msgstr "Återställ lösenord"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "Reset view"
+msgstr ""
+
 #: src/components/alerts-history-columns.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
@@ -1837,6 +1897,10 @@ msgstr "Omstarter"
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "Återuppta"
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Resume rotation"
+msgstr ""
 
 #. Package version
 #: src/components/routes/system/package-updates-table.tsx
@@ -2120,6 +2184,10 @@ msgstr "System"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "System kan hanteras i en <0>config.yml</0>-fil i din datakatalog."
 
+#: src/components/systems-table/systems-globe.tsx
+#~ msgid "Systems without a location"
+#~ msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "Tabell"
@@ -2369,8 +2437,13 @@ msgstr "Okänd"
 msgid "Unlimited"
 msgstr "Obegränsad"
 
+#: src/components/systems-table/systems-globe.tsx
+msgid "up"
+msgstr ""
+
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/systems-table/systems-globe.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "Upp"
@@ -2558,3 +2631,11 @@ msgstr "Ja"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "Dina användarinställningar har uppdaterats."
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom in"
+msgstr ""
+
+#: src/components/systems-table/systems-globe.tsx
+msgid "Zoom out"
+msgstr ""
