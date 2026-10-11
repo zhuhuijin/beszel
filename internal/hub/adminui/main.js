@@ -5,8 +5,9 @@
  * auto-loaded by the admin UI via /_/extensions.js. Translates UI chrome at
  * runtime with an en->zh dictionary; unmatched strings fall back to English.
  *
- * Language is resolved from localStorage ("pb_admin_lang"), defaulting to the
- * browser locale. A small toggle button is injected in the bottom-left corner.
+ * Language resolution: the toggle button (localStorage "pb_admin_lang") wins,
+ * then the Beszel site language setting (same-origin localStorage "lang"),
+ * then the browser locale. Unmatched strings fall back to English.
  */
 (function () {
 	'use strict'
@@ -15,7 +16,16 @@
 
 	let lang = 'en'
 	try {
-		lang = localStorage.getItem(LANG_KEY) || (/^zh/i.test(navigator.language || '') ? 'zh' : 'en')
+		const manual = localStorage.getItem(LANG_KEY)
+		if (manual) {
+			// explicit toggle on the admin page wins
+			lang = manual
+		} else if (localStorage.getItem('lang')) {
+			// follow the Beszel site language setting (same-origin localStorage "lang")
+			lang = /^zh/i.test(localStorage.getItem('lang')) ? 'zh' : 'en'
+		} else {
+			lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en'
+		}
 	} catch (e) {
 		lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en'
 	}
