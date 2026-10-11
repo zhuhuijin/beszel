@@ -477,13 +477,13 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 						<li key={system.id}>
 							<button
 								type="button"
-								className="flex w-full items-center gap-2.5 rounded-md border border-transparent px-2.5 py-2 text-start transition-colors hover:bg-muted/60"
+								className="flex w-full items-center gap-2.5 rounded-md border border-transparent px-2.5 py-2 text-start transition-colors hover:bg-muted/60 lg:gap-3 lg:px-3 lg:py-2.5"
 								onClick={() => openSystem(system.id)}
 								onMouseEnter={() => positioned.includes(system) && highlightMarker(system.id)}
 								onFocus={() => positioned.includes(system) && highlightMarker(system.id)}
 								onBlur={() => highlightMarker(null)}
 							>
-								<span className="flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-muted text-base leading-none">
+								<span className="flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-muted text-base leading-none lg:size-9 lg:text-lg">
 									{cc ? (
 										<span className="translate-y-px">{flagEmoji(cc)}</span>
 									) : (
@@ -492,21 +492,23 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 								</span>
 								<span className="min-w-0 flex-1">
 									<span className="flex items-center gap-1.5">
-										<span className="truncate text-[13px] font-medium">{system.name}</span>
+										<span className="truncate text-[13px] font-medium lg:text-[15px] lg:font-semibold">
+											{system.name}
+										</span>
 										<span
 											className={cn(
-												"shrink-0 rounded px-1 text-[9px] font-medium leading-4",
+												"shrink-0 rounded px-1 text-[9px] font-medium leading-4 lg:px-1.5 lg:text-[11px] lg:leading-5",
 												STATUS_BADGE_CLASSES[system.status] ?? STATUS_BADGE_CLASSES.paused
 											)}
 										>
 											{statusLabel}
 										</span>
 									</span>
-									<span className="block truncate text-[11px] text-muted-foreground">
+									<span className="block truncate text-[11px] text-muted-foreground lg:text-[13px]">
 										{country || t`Location not set`}
 									</span>
 								</span>
-								<span className="grid w-32 shrink-0 gap-1">
+								<span className="grid w-32 shrink-0 gap-1 lg:w-44 lg:gap-1.5">
 									<GaugeBar label="CPU" value={system.info.cpu} meterClass={meterClassFor(system, system.info.cpu)} />
 									<GaugeBar label={t`MEM`} value={system.info.mp} meterClass={meterClassFor(system, system.info.mp)} />
 									<GaugeBar label={t`DSK`} value={system.info.dp} meterClass={meterClassFor(system, system.info.dp)} />
@@ -525,9 +527,11 @@ function GaugeBar({ label, value, meterClass }: { label: string; value?: number;
 	const pct = Math.max(0, Math.min(100, value ?? 0))
 	return (
 		<span className="flex items-center gap-1.5 tabular-nums">
-			<span className="w-6 shrink-0 text-[9px] text-muted-foreground">{label}</span>
-			<span className="w-8 shrink-0 text-end text-[10px] text-muted-foreground">{decimalString(pct, 1)}%</span>
-			<span className="h-1 min-w-0 flex-1 overflow-hidden rounded-full bg-muted">
+			<span className="w-6 shrink-0 text-[9px] text-muted-foreground lg:w-8 lg:text-[11px]">{label}</span>
+			<span className="w-8 shrink-0 text-end text-[10px] text-muted-foreground lg:w-10 lg:text-xs lg:font-medium">
+				{decimalString(pct, 1)}%
+			</span>
+			<span className="h-1 min-w-0 flex-1 overflow-hidden rounded-full bg-muted lg:h-1.5">
 				<span className={cn("block h-full rounded-full", meterClass)} style={{ width: `${pct}%` }} />
 			</span>
 		</span>
