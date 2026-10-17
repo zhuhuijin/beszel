@@ -11,6 +11,7 @@ import { SystemStatus } from "@/lib/enums"
 import { $userSettings } from "@/lib/stores"
 import type { SystemLocation, SystemRecord } from "@/types"
 import { cn, decimalString } from "@/lib/utils"
+import { cityDisplayName, cleanCityName } from "./globe/city-names"
 import { GlobeRenderer, type GlobePalette } from "./globe/globe-renderer"
 
 /** idle rotation speed in css px/s passed to renderer.move (~6°/s at zoom 1) */
@@ -85,19 +86,26 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 		}
 	}, [i18n.locale])
 
-	const countryText = useCallback(
+	// list subtitle: localized country + localized city, e.g. 德国·柏林
+	const placeText = useCallback(
 		(system: SystemRecord) => {
-			const cc = system.location?.cc
+			const location = system.location
+			if (!location) return ""
+			const cc = location.cc
+			let country: string | undefined
 			if (cc) {
 				try {
-					return regionNames?.of(cc.toUpperCase()) ?? system.location?.country
+					country = regionNames?.of(cc.toUpperCase()) ?? location.country
 				} catch {
-					return system.location?.country
+					country = location.country
 				}
+			} else {
+				country = location.country
 			}
-			return system.location?.country
+			const city = cityDisplayName(location.city, i18n.locale)
+			return [country, city].filter(Boolean).join("·")
 		},
-		[regionNames]
+		[regionNames, i18n.locale]
 	)
 
 	// meter fill color, matching the table's threshold coloring
@@ -136,14 +144,16 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 		return { positioned, unpositioned }
 	}, [systems])
 
-	// clients per country, shown as ×N on the globe label
-	const countryCounts = useMemo(() => {
+	// clients per city (country+city group), shown as ×N on the globe label
+	const cityCounts = useMemo(() => {
 		const counts = new Map<string, number>()
 		for (const system of positioned) {
-			const cc = system.location?.cc
-			if (cc) {
-				counts.set(cc, (counts.get(cc) ?? 0) + 1)
-			}
+			const location = system.location
+			if (!location) continue
+			const cc = location.cc ?? ""
+			const city = cleanCityName(location.city ?? "")
+			const key = `${cc}|${city}`
+			counts.set(key, (counts.get(key) ?? 0) + 1)
 		}
 		return counts
 	}, [positioned])
@@ -154,6 +164,9 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 				const location = system.location
 				if (!location || (location.lat === 0 && location.lng === 0)) return []
 				const cc = location.cc
+				// globe labels use the cleaned English city name; the list shows the localized one
+				const city = cleanCityName(location.city ?? "")
+				const group = `${cc ?? ""}|${city}`
 				return [
 					{
 						id: system.id,
@@ -161,11 +174,13 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 						lng: location.lng,
 						color: STATUS_MARKER_COLORS[system.status] ?? STATUS_MARKER_COLORS.paused,
 						flag: cc,
-						count: cc ? countryCounts.get(cc) : undefined,
+						group,
+						cityLabel: cc ? `${cc}·${city}` : city,
+						count: cityCounts.get(group),
 					},
 				]
 			}),
-		[positioned, countryCounts]
+		[positioned, cityCounts]
 	)
 
 	const statusCounts = useMemo(() => {
@@ -486,7 +501,7 @@ const SystemsGlobeView = memo(({ rows }: { rows: Row<SystemRecord>[] }) => {
 								: system.status === SystemStatus.Paused
 									? t`Paused`
 									: t`Pending`
-					const country = countryText(system)
+					const country = placeText(system)
 					return (
 						<li key={system.id}>
 							<button

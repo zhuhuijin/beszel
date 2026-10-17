@@ -14,7 +14,6 @@ import (
 	"github.com/henrygd/beszel/internal/hub/expirymap"
 	"github.com/henrygd/beszel/internal/hub/utils"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 const (
@@ -122,9 +121,6 @@ func geocodeSystem(app core.App, systemId string, ip string) error {
 		return err
 	}
 	location := locationMap(record)
-	if location == nil {
-		location = map[string]any{}
-	}
 	if manual, _ := location["manual"].(bool); manual {
 		return nil
 	}
@@ -135,6 +131,7 @@ func geocodeSystem(app core.App, systemId string, ip string) error {
 	if err != nil {
 		return err
 	}
+	result.city = normalizeCity(result.city)
 	location["lat"] = result.lat
 	location["lng"] = result.lng
 	location["ip"] = ip
@@ -257,13 +254,22 @@ func fetchGeo(url string) (geoResult, error) {
 	return result, nil
 }
 
-// locationMap extracts the systems.location JSON field as a mutable map.
-func locationMap(record *core.Record) map[string]any {
-	switch v := record.Get("location").(type) {
-	case types.JSONMap[any]:
-		return v
-	case map[string]any:
-		return v
+// normalizeCity strips provider quirks from city names so labels stay compact:
+// "Munich (Moosach)" -> "Munich", "X, Region" -> "X".
+func normalizeCity(city string) string {
+	if idx := strings.IndexAny(city, "(,·/"); idx >= 0 {
+		city = city[:idx]
 	}
-	return nil
+	return strings.TrimSpace(city)
+}
+
+// locationMap extracts the systems.location JSON field as a mutable map.
+// Record.Get returns the raw JSON string on fresh loads, so it must be
+// unmarshalled explicitly (a plain type assertion returns nil).
+func locationMap(record *core.Record) map[string]any {
+	location := map[string]any{}
+	if err := record.UnmarshalJSONField("location", &location); err != nil {
+		slog.Warn("Failed to unmarshal system location", "system", record.Id, "err", err)
+	}
+	return location
 }

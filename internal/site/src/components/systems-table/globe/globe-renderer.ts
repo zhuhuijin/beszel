@@ -15,7 +15,11 @@ export interface GlobeMarker {
 	color: string
 	/** ISO 3166-1 alpha-2 code; when set (and the flag font is ready) markers render as circular flag badges */
 	flag?: string
-	/** number of clients in this country; when > 1 the label shows ×N */
+	/** label merge key: clients sharing a key share one label (e.g. "DE|Munich") */
+	group?: string
+	/** label text after the flag, e.g. "DE·Munich"; requires group to be labeled */
+	cityLabel?: string
+	/** number of clients in this label group; when > 1 the label shows ×N */
 	count?: number
 }
 
@@ -382,9 +386,9 @@ export class GlobeRenderer {
 	}
 
 	/**
-	 * Floating flag+country-code labels that ride their marker: the label sits at
-	 * a fixed offset from the dot (right of it, flipped to the left near the right
-	 * edge), so it rotates in perfect sync with the globe — KPanel-style.
+	 * Floating flag+city labels that ride their marker: the label sits at a fixed
+	 * offset from the dot (right of it, flipped to the left near the right edge),
+	 * so it rotates in perfect sync with the globe — KPanel-style.
 	 */
 	private drawLabels(anchors: Map<string, number>) {
 		const ctx = this.ctx
@@ -396,22 +400,28 @@ export class GlobeRenderer {
 		const flagR = 10 * s
 		const gap = 8 * s
 		const font = labelFont(s)
-		// one label per country, anchored to its front-most visible marker
+		// one label per group (same country+city), anchored to its front-most visible marker
 		const labelOwner = new Map<string, string>()
 		for (const m of this.projected) {
 			const marker = this.markerById.get(m.id)
-			if (marker?.flag) {
-				labelOwner.set(marker.flag, m.id)
+			if (marker?.group) {
+				labelOwner.set(marker.group, m.id)
 			}
 		}
 		for (const m of this.projected) {
 			const marker = this.markerById.get(m.id)
 			if (!marker?.flag || !flagFontReady) continue
-			if (labelOwner.get(marker.flag) !== m.id) continue
-			const cc = marker.flag.toUpperCase()
-			// same country with several clients: append the count, e.g. "DE ×2"
+			if (!marker.group || labelOwner.get(marker.group) !== m.id) continue
+			// label text: "DE·Munich", plus the city's client count, e.g. "DE·Munich ×2"
 			const count = marker.count ?? 1
-			const text = count > 1 ? `${cc} ×${count}` : cc
+			let text = marker.cityLabel || marker.flag.toUpperCase()
+			// keep canvas labels compact for long city names
+			if (text.length > 16) {
+				text = `${text.slice(0, 15)}…`
+			}
+			if (count > 1) {
+				text += ` ×${count}`
+			}
 			const anchor = anchors.get(m.id) ?? 5
 			const textWidth = measureText(text, font)
 			const w = Math.ceil(gap + flagR * 2 + 6 + textWidth + gap)
@@ -460,7 +470,13 @@ export class GlobeRenderer {
 				ctx.stroke()
 			}
 			const count = marker?.count ?? 1
-			const text = marker?.flag ? `${marker.flag.toUpperCase()}${count > 1 ? ` ×${count}` : ""}` : ""
+			let text = marker?.cityLabel || marker?.flag?.toUpperCase() || ""
+			if (text.length > 16) {
+				text = `${text.slice(0, 15)}…`
+			}
+			if (count > 1) {
+				text += ` ×${count}`
+			}
 			ctx.font = font
 			ctx.fillStyle = this.palette.labelText
 			ctx.textAlign = "left"
